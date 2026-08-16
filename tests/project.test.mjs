@@ -135,6 +135,7 @@ test("double opt-in uses the tested foundation and production confirmation link"
   assert.match(html, /Confirmation required/);
   assert.match(html, /confirm-cta\.png/);
   assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/sequence-confirmed\.html\?confirmation=brevo/);
+  assert.equal(html.match(/href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/sequence-confirmed\.html\?confirmation=brevo"/g)?.length, 3);
   assert.doesNotMatch(html, /conference-group/);
   assert.doesNotMatch(html, /localhost|double_opt_in_url/);
 });
