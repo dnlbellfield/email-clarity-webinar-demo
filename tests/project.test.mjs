@@ -144,3 +144,14 @@ test("Demo 2 uses the approved tested email foundation", async () => {
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /ortiz_profie_\.png/);
 });
+
+test("Demo 3 uses the approved tested email foundation and inquiry CTA", async () => {
+  const html = await readFile("site/emails/follow-up.html", "utf8");
+  assert.match(html, /<o:OfficeDocumentSettings>/);
+  assert.match(html, /Preview Text Spacing Hack : BEGIN/);
+  assert.match(html, /Demo 3 of 3/);
+  assert.match(html, /Keep the system practical/);
+  assert.match(html, /email_clarity_cta\.png/);
+  assert.match(html, /https:\/\/getemailclarity\.com\/#inquiry/);
+  assert.match(html, /ortiz_profie_\.png/);
+});

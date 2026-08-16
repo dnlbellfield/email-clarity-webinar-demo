@@ -67,7 +67,7 @@ Create one Email Clarity double-opt-in template and three Commonlight sequence t
 1. `Confirm your Commonlight demo sequence` — sender Email Clarity; link the CTA to the absolute production `/sequence-confirmed.html?confirmation=brevo` URL.
 2. `[Demo 1/3] Your workshop details: A Practical Content System`
 3. `[Demo 2/3] Reminder: A Practical Content System`
-4. `[Demo 3/3] Your Commonlight content-planning resources`
+4. `[Demo 3/3] Your Commonlight content-planning recap`
 
 The double-opt-in email is not one of the three sequence messages. Replace all relative image and CTA URLs with absolute production URLs. Replace the final project's local case-study link with the approved Email Clarity inquiry URL.
 

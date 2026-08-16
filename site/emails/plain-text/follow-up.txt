@@ -1,14 +1,14 @@
-SUBJECT: [Demo 3/3] Your Commonlight content-planning resources
+SUBJECT: [Demo 3/3] Your Commonlight content-planning recap
 PREHEADER: The final message in your Commonlight demonstration sequence.
 
 KEEP THE SYSTEM PRACTICAL
 
-Thanks for your interest in A Practical Content System for Small Nonprofit Teams.
+Thanks for exploring A Practical Content System for Small Nonprofit Teams.
 
-Start with recurring themes, reuse strong ideas across channels, connect content with fundraising moments, and choose a review rhythm your team can maintain.
+Choose recurring themes that support real priorities. Reuse strong stories without making every channel identical. Connect everyday content with fundraising moments. Give reviews clear owners and manageable deadlines.
 
 Need help implementing a campaign like this?
-Discuss your project with Email Clarity: ../case-study.html?campaign_source=project_cta
+Discuss your project with Email Clarity: https://getemailclarity.com/#inquiry
 
 Demo 3 of 3. This is the final message in the sequence; no newsletter or unrelated marketing follows. Commonlight Studio and the event are fictional.
 Unsubscribe: {{ unsubscribe }}
