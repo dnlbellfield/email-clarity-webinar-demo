@@ -105,6 +105,29 @@ test("inbox sequence is explicitly labeled and unsubscribable", async () => {
   }
 });
 
+test("promotional invitation uses the tested foundation and absolute campaign URLs", async () => {
+  const html = await readFile("site/emails/promotional.html", "utf8");
+  assert.match(html, /<o:OfficeDocumentSettings>/);
+  assert.match(html, /Preview Text Spacing Hack : BEGIN/);
+  assert.match(html, /Online workshop/);
+  assert.match(html, /conference-group-front-email\.jpg/);
+  assert.match(html, /workshop_ct\.png/);
+  assert.match(html, /ortiz_profie_\.png/);
+  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/\?campaign_source=promotional_email/);
+  assert.match(html, /\{\{ unsubscribe \}\}/);
+  assert.doesNotMatch(html, /(?:href|src)="\.\.?\//);
+  assert.doesNotMatch(html, /demo project|demonstration|fictional/i);
+});
+
+test("email preview index describes the current five-message journey", async () => {
+  const html = await readFile("site/email-previews.html", "utf8");
+  assert.match(html, /One invitation, one opt-in, and three connected sequence emails/);
+  assert.match(html, /Workshop details and program/);
+  assert.match(html, /About 15 minutes after Demo 1/);
+  assert.match(html, /Content-planning recap/);
+  assert.doesNotMatch(html, /Registration confirmation|Resource follow-up/);
+});
+
 test("Demo 1 preserves the tested email-client foundation", async () => {
   const html = await readFile("site/emails/confirmation.html", "utf8");
   for (const marker of [

@@ -17,4 +17,4 @@ Thursday, November 12, 2026
 11:00 a.m.–2:30 p.m. Pacific / 2:00–5:30 p.m. Eastern
 Free half-day online workshop
 
-View event details: ../index.html?campaign_source=promotional_email
+View event details: https://email-clarity-webinar-demo.netlify.app/?campaign_source=promotional_email
