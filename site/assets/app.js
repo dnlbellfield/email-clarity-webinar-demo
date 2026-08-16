@@ -1,16 +1,13 @@
 const page = document.body.dataset.page || "unknown";
-const consentKey = "commonlight_demo_analytics_consent";
 const allowedEvents = new Set([
   "demo_email_cta_click",
   "demo_landing_view",
   "demo_registration_form_start",
   "demo_registration_attempt",
   "demo_registration_success",
-  "demo_email_preview",
-  "demo_automation_step_view"
+  "demo_email_preview"
 ]);
 
-let analyticsConsent = localStorage.getItem(consentKey) === "granted";
 let mode = "preview";
 
 function fixedValue(value) {
@@ -24,53 +21,8 @@ function track(event, parameters = {}) {
   );
   const detail = { event, ...safeParameters };
   document.dispatchEvent(new CustomEvent("demo:track", { detail }));
-  if (analyticsConsent) {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(detail);
-  }
-}
-
-function loadGtm() {
-  const id = document.querySelector('meta[name="demo-gtm-id"]')?.content;
-  if (!analyticsConsent || !/^GTM-[A-Z0-9]+$/.test(id || "") || document.querySelector("script[data-demo-gtm]")) return;
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: "demo_consent_update", analytics_storage: "granted" });
-  const script = document.createElement("script");
-  script.async = true;
-  script.dataset.demoGtm = "true";
-  script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(id)}`;
-  document.head.append(script);
-}
-
-function initConsent() {
-  const banner = document.querySelector("[data-consent-banner]");
-  const stored = localStorage.getItem(consentKey);
-  if (banner && !stored) banner.hidden = false;
-  document.querySelectorAll("[data-consent-choice]").forEach((button) => {
-    button.addEventListener("click", () => {
-      analyticsConsent = button.dataset.consentChoice === "accept";
-      localStorage.setItem(consentKey, analyticsConsent ? "granted" : "denied");
-      if (banner) banner.hidden = true;
-      if (analyticsConsent) {
-        loadGtm();
-        track("demo_landing_view", { page_name: page });
-      }
-      updateConsentStatus();
-    });
-  });
-  document.querySelector("[data-reset-consent]")?.addEventListener("click", () => {
-    localStorage.removeItem(consentKey);
-    window.location.reload();
-  });
-  updateConsentStatus();
-  loadGtm();
-}
-
-function updateConsentStatus() {
-  document.querySelectorAll("[data-consent-status]").forEach((element) => {
-    const value = localStorage.getItem(consentKey);
-    element.textContent = value === "granted" ? "Accepted" : value === "denied" ? "Declined" : "Not chosen";
-  });
+  window.dataLayer.push(detail);
 }
 
 async function getMode() {
@@ -173,9 +125,6 @@ function initInteractiveTracking() {
   document.querySelectorAll("[data-email-preview]").forEach((element) => {
     track("demo_email_preview", { email_type: element.dataset.emailPreview });
   });
-  document.querySelectorAll("details[data-automation-step]").forEach((details) => details.addEventListener("toggle", () => {
-    if (details.open) track("demo_automation_step_view", { automation_step: details.dataset.automationStep });
-  }));
 }
 
 function initConfirmation() {
@@ -188,15 +137,11 @@ function initConfirmation() {
 }
 
 window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({ event: "demo_consent_default", analytics_storage: "denied" });
-initConsent();
 getMode();
 initForm();
 initInteractiveTracking();
 initConfirmation();
-if (analyticsConsent) {
-  track("demo_landing_view", { page_name: page });
-  if (new URLSearchParams(window.location.search).get("demo_source") === "promotional_email") {
-    track("demo_email_cta_click", { email_type: "promotional" });
-  }
+track("demo_landing_view", { page_name: page });
+if (new URLSearchParams(window.location.search).get("demo_source") === "promotional_email") {
+  track("demo_email_cta_click", { email_type: "promotional" });
 }
