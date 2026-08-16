@@ -3,13 +3,15 @@ PREHEADER: The second message in your accelerated Commonlight demonstration sequ
 
 A PRACTICAL CONTENT SYSTEM FOR SMALL NONPROFIT TEAMS
 
-A quick reminder that the webinar begins tomorrow.
+A quick reminder that the free half-day online workshop begins tomorrow.
 
 Thursday, November 12, 2026
-11:00 a.m. Pacific / 2:00 p.m. Eastern
-45 minutes · Online
+11:00 a.m.–2:30 p.m. Pacific / 2:00–5:30 p.m. Eastern
+Free · Live online
 
-View event details: ../index.html
+Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel will lead four connected sessions, with short breaks between them.
 
-Demo 2 of 3. This reminder was sent on an accelerated schedule as part of an Email Clarity demonstration. Commonlight Studio and the webinar are fictional.
+View workshop details: ../index.html
+
+Demo 2 of 3. This reminder was sent on an accelerated schedule as part of an Email Clarity demonstration. Commonlight Studio and the workshop are fictional.
 Unsubscribe: {{ unsubscribe }}

@@ -12,13 +12,14 @@ test("every public page has a title and viewport", async () => {
   }
 });
 
-test("registration fields have explicit labels and no analytics PII interpolation", async () => {
+test("demo sequence fields have explicit labels and no analytics PII interpolation", async () => {
   const html = await readFile("site/register.html", "utf8");
-  for (const id of ["firstName", "email", "organization"]) assert.match(html, new RegExp(`for="${id}"`));
+  for (const id of ["firstName", "email", "sequenceConsent"]) assert.match(html, new RegExp(`for="${id}"`));
   const js = await readFile("site/assets/app.js", "utf8");
   const trackCalls = [...js.matchAll(/track\([^;]+/g)].map((match) => match[0]).join("\n");
-  assert.doesNotMatch(trackCalls, /\.value|firstName|organization|email_address/);
+  assert.doesNotMatch(trackCalls, /\.value|firstName|email_address/);
   assert.doesNotMatch(js, /generate_lead|inquiry_success/);
+  assert.doesNotMatch(js, /demo_registration_/);
 });
 
 test("portfolio layers contain clear disclosure", async () => {
@@ -30,19 +31,58 @@ test("portfolio layers contain clear disclosure", async () => {
   assert.match(await readFile("site/email-previews.html", "utf8"), /Portfolio project:/);
 });
 
-test("campaign landing stays free of portfolio implementation language", async () => {
+test("campaign landing has a minimal explicit demo-sequence opt-in", async () => {
   const html = await readFile("site/register.html", "utf8");
-  assert.doesNotMatch(html, /fictional|simulat|\bdemo\b|Brevo|dataLayer|GTM|GA4|test mode/i);
-  for (const image of ["conference-group-front.jpg", "conference_ortiz.jpg", "conference-group.jpg"]) {
+  assert.doesNotMatch(html, /name="organization"|name="role"/i);
+  assert.match(html, /name="email"[^>]+required/);
+  assert.match(html, /name="firstName"/);
+  assert.match(html, /name="sequenceConsent"[^>]+required/);
+  assert.doesNotMatch(html, /name="sequenceConsent"[^>]+checked/);
+  assert.match(html, /three-email Commonlight demonstration sequence/i);
+  assert.match(html, /This does not register you for a live event/i);
+  assert.match(html, /Receive the three-email sequence/i);
+  assert.match(html, /unsubscribe at any time/i);
+  assert.match(html, /not be added to a general marketing list/i);
+  assert.match(html, /shell grid gap-12[^\"]*lg:grid-cols-\[1fr_\.82fr\]/);
+  assert.match(html, /11 a\.m\.–2:30 p\.m\. PT/);
+  for (const speaker of ["Lena Ortiz", "Maya Chen", "Theo Brooks", "Amina Patel"]) {
+    assert.match(html, new RegExp(speaker));
+  }
+  for (const image of ["conference-group-front.jpg", "ortiz_conf.jpeg", "conference-group.jpg"]) {
     assert.match(html, new RegExp(image));
   }
+});
+
+test("the locked workshop definition is consistent across campaign sources", async () => {
+  const sources = [
+    "site/register.html",
+    "site/index.html",
+    "site/emails/promotional.html",
+    "site/emails/confirmation.html",
+    "site/emails/reminder.html",
+    "docs/CAMPAIGN_BRIEF.md",
+    "docs/BREVO_SETUP.md"
+  ];
+  const combined = (await Promise.all(sources.map((source) => readFile(source, "utf8")))).join("\n");
+  assert.doesNotMatch(combined, /45.minute|single presenter|\bwebinar\b/i);
+  for (const phrase of [
+    "A Practical Content System for Small Nonprofit Teams",
+    "free half-day online workshop",
+    "Thursday, November 12, 2026",
+    "11:00 a.m.–2:30 p.m. Pacific",
+    "four connected sessions",
+    "Lena Ortiz",
+    "Maya Chen",
+    "Theo Brooks",
+    "Amina Patel"
+  ]) assert.match(combined, new RegExp(phrase, "i"));
 });
 
 test("navigation preserves the campaign and portfolio hierarchy", async () => {
   const caseStudy = await readFile("site/index.html", "utf8");
   const campaign = await readFile("site/register.html", "utf8");
   const emails = await readFile("site/email-previews.html", "utf8");
-  assert.match(caseStudy, /href="\/">Experience the Commonlight campaign/);
+  assert.match(caseStudy, /href="\/"[^>]*>Experience the Commonlight campaign/);
   assert.match(caseStudy, /href="\/email-previews\.html">View campaign emails/);
   assert.doesNotMatch(caseStudy, /href="\/confirmation\.html"/);
   assert.doesNotMatch(campaign, /href="\/email-previews\.html"/);
@@ -50,9 +90,15 @@ test("navigation preserves the campaign and portfolio hierarchy", async () => {
   assert.match(emails, /href="\/case-study\.html">Back to project case study/);
 });
 
-test("email artifacts contain natural campaign copy without wrapper disclosures", async () => {
-  for (const page of ["promotional.html", "confirmation.html", "reminder.html", "follow-up.html"]) {
+test("inbox sequence is explicitly labeled and unsubscribable", async () => {
+  const promotional = await readFile("site/emails/promotional.html", "utf8");
+  assert.doesNotMatch(promotional, /demo project|demonstration/i);
+  const doubleOptIn = await readFile("site/emails/double-opt-in.html", "utf8");
+  assert.match(doubleOptIn, /Confirm your Commonlight demo sequence/i);
+  for (const [page, position] of [["confirmation.html", "1"], ["reminder.html", "2"], ["follow-up.html", "3"]]) {
     const html = await readFile(`site/emails/${page}`, "utf8");
-    assert.doesNotMatch(html, /fictional|demo project|demonstration/i, page);
+    assert.match(html, new RegExp(`Demo ${position} of 3`, "i"), page);
+    assert.match(html, /fictional/i, page);
+    assert.match(html, /\{\{ unsubscribe \}\}/, page);
   }
 });

@@ -1,8 +1,8 @@
-# Email Clarity webinar demo
+# Email Clarity online-event demo
 
-A small static webinar campaign showing how promotional email, registration, a protected Brevo automation path, safe local dataLayer events, accessibility, and QA connect.
+A small static campaign for a fictional free half-day online workshop, showing how promotional email, a real sequence request, a protected Brevo automation path, safe local dataLayer events, accessibility, and QA connect.
 
-Commonlight Studio, Lena Ortiz, and the event are fictional. This is not client work and no performance results are claimed.
+Commonlight Studio, its presenters, and the event are fictional. This is not client work and no performance results are claimed.
 
 ## Run locally
 
@@ -12,14 +12,15 @@ npm run build
 npm run preview
 ```
 
-Open `http://localhost:8080`. Static preview mode works without credentials. Netlify Functions require `netlify dev` or a Netlify deploy; plain static preview safely falls back to simulated registration.
+Open `http://localhost:8080`. Static preview mode works without credentials. The public inbox sequence is intentionally inactive until the Brevo and safety checklist is approved.
 
 ## Local routes
 
 - `/case-study.html` — primary portfolio entry, transparent project disclosure, implementation details, and testing status
-- `/` — Commonlight Studio attendee experience: webinar landing page and registration form
-- `/confirmation.html` — campaign confirmation state
-- `/email-previews.html` — four email previews inside the Email Clarity portfolio wrapper
+- `/` — Commonlight Studio campaign and explicit demo-sequence opt-in
+- `/confirmation.html` — pending double-opt-in state
+- `/sequence-confirmed.html` — reserved destination after confirmed opt-in
+- `/email-previews.html` — double-opt-in and campaign email previews
 
 ## Checks
 
@@ -30,18 +31,9 @@ npm run check
 
 The build copies an explicit file allowlist into `dist/`. The check verifies that exact list and scans it for obvious Brevo secrets.
 
-## Controlled test mode
+## Brevo activation
 
-Copy `.env.example` to a local ignored `.env` and set:
-
-- `DEMO_MODE=test`
-- `BREVO_API_KEY`
-- `BREVO_LIST_ID`
-- `DEMO_ALLOWED_EMAILS` as a comma-separated exact allowlist
-
-The Brevo list should be dedicated to this demo. Configure standard `FIRSTNAME` plus one optional text attribute named `ORGANIZATION`. Entry into that list is the trigger for one automation containing confirmation, reminder, and follow-up messages.
-
-Do not enable test mode until the list, attribute, automation timing, and test addresses have been reviewed. Do not put secrets or the address allowlist into HTML, client JavaScript, GTM, or GA4.
+See [docs/BREVO_SETUP.md](docs/BREVO_SETUP.md) for the exact lists, attributes, automation, environment variables, abuse controls, and staged test plan. The current function validates the future request contract but deliberately does not store contacts or call Brevo. Real integration work begins only after that setup is approved.
 
 ## Local tracking events
 

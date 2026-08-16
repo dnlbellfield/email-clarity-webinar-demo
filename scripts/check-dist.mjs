@@ -1,7 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 
 const expected = new Set([
-  "assets/app.js", "assets/images/conference-group-front.jpg", "assets/images/conference-group.jpg", "assets/images/conference_ortiz.jpg", "assets/site.css", "case-study.html", "confirmation.html",
+  "assets/app.js", "assets/images/conference-group-front.jpg", "assets/images/conference-group.jpg", "assets/images/conference_ortiz.jpg", "assets/images/ortiz_conf.jpeg", "assets/site.css", "case-study.html", "confirmation.html",
   "email-previews.html", "emails/confirmation.html", "emails/double-opt-in.html", "emails/follow-up.html",
   "emails/plain-text/confirmation.txt", "emails/plain-text/double-opt-in.txt", "emails/plain-text/follow-up.txt",
   "emails/plain-text/promotional.txt", "emails/plain-text/reminder.txt", "emails/promotional.html",
