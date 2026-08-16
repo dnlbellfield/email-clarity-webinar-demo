@@ -118,7 +118,7 @@ test("Demo 1 preserves the tested email-client foundation", async () => {
     "max-width: 680px"
   ]) assert.match(html, new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), marker);
 
-  assert.match(html, /conference-group-front\.jpg/);
+  assert.match(html, /conference-group-front-email\.jpg/);
   assert.match(html, /ortiz_profie_\.png/);
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /<td align="left" width="70%" style="width:70%;[^>]*>Commonlight Studio<\/td>\s*<td align="right" width="30%" style="width:30%;[^>]*>Demo 1 of 3<\/td>/);
@@ -140,7 +140,7 @@ test("Demo 2 uses the approved tested email foundation", async () => {
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
   assert.match(html, /Demo 2 of 3/);
   assert.match(html, /Your practical content workshop starts tomorrow/);
-  assert.match(html, /conference-group\.jpg/);
+  assert.match(html, /conference-group-email\.jpg/);
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /ortiz_profie_\.png/);
 });
