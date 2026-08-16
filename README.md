@@ -1,6 +1,6 @@
-# Email Clarity webinar demonstration
+# Email Clarity webinar demo
 
-A fictional, static webinar campaign showing how promotional email, registration, protected Brevo automation, consent-aware analytics, accessibility, and QA connect.
+A small static webinar campaign showing how promotional email, registration, a protected Brevo automation path, safe local dataLayer events, accessibility, and QA connect.
 
 Commonlight Studio, Lena Ortiz, and the event are fictional. This is not client work and no performance results are claimed.
 
@@ -13,6 +13,13 @@ npm run preview
 ```
 
 Open `http://localhost:8080`. Static preview mode works without credentials. Netlify Functions require `netlify dev` or a Netlify deploy; plain static preview safely falls back to simulated registration.
+
+## Local routes
+
+- `/` — Commonlight Studio webinar landing page and registration form
+- `/confirmation.html` — campaign confirmation state
+- `/email-previews.html` — four email previews inside the Email Clarity portfolio wrapper
+- `/case-study.html` — transparent project disclosure, implementation details, and testing status
 
 ## Checks
 
@@ -36,11 +43,11 @@ The Brevo list should be dedicated to this demo. Configure standard `FIRSTNAME` 
 
 Do not enable test mode until the list, attribute, automation timing, and test addresses have been reviewed. Do not put secrets or the address allowlist into HTML, client JavaScript, GTM, or GA4.
 
-## Analytics configuration
+## Local tracking events
 
-No GTM or GA4 identifiers are configured. After approval, add the separate demo GTM container ID to the `demo-gtm-id` meta value during the deploy configuration process. GA4 tags must require granted analytics consent and must use only the fixed parameters documented on `tracking.html`.
+The vertical slice pushes fixed, non-identifying events into `window.dataLayer` for local inspection. It does not load GTM, GA4, or any other analytics service. External analytics configuration is deliberately deferred.
 
-Never map form fields, DOM values, query strings containing registration data, or arbitrary URLs into analytics. Do not create `generate_lead` or the production Email Clarity `inquiry_success` event.
+Never map form fields, DOM values, query strings containing registration data, or arbitrary URLs into analytics. Do not create `generate_lead` or the production Email Clarity `inquiry_success` event. Any later external analytics connection requires separate approval and a consent review.
 
 ## External configuration status
 

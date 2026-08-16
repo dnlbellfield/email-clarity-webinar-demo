@@ -9,6 +9,4 @@ Thursday, November 12, 2026
 11:00 a.m. Pacific / 2:00 p.m. Eastern
 45 minutes · Online
 
-View event details: ../register.html
-
-DEMO PROJECT: Commonlight Studio, Lena Ortiz, and this event are fictional. This message is part of a controlled implementation demonstration.
+View event details: ../index.html

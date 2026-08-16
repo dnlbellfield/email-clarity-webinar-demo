@@ -34,14 +34,6 @@ async function getMode() {
   } catch {
     mode = "preview";
   }
-  document.querySelectorAll("[data-mode-label]").forEach((element) => {
-    element.textContent = mode === "test" ? "Controlled test mode" : "Public preview mode";
-  });
-  document.querySelectorAll("[data-mode-copy]").forEach((element) => {
-    element.textContent = mode === "test"
-      ? "Only explicitly allowlisted test addresses can enter the Brevo automation."
-      : "This submission is simulated. No contact is created and no email is sent.";
-  });
 }
 
 function setError(input, message) {
@@ -133,7 +125,7 @@ function initConfirmation() {
   const result = sessionStorage.getItem("commonlight_demo_registration");
   element.textContent = result === "test"
     ? "This approved test registration was sent securely to Brevo."
-    : "This preview registration was simulated. No contact was created and no email was sent.";
+    : "No contact was created and no email was sent.";
 }
 
 window.dataLayer = window.dataLayer || [];
@@ -142,6 +134,6 @@ initForm();
 initInteractiveTracking();
 initConfirmation();
 track("demo_landing_view", { page_name: page });
-if (new URLSearchParams(window.location.search).get("demo_source") === "promotional_email") {
+if (new URLSearchParams(window.location.search).get("campaign_source") === "promotional_email") {
   track("demo_email_cta_click", { email_type: "promotional" });
 }

@@ -16,6 +16,4 @@ Thursday, November 12, 2026
 11:00 a.m. Pacific / 2:00 p.m. Eastern
 45 minutes · Online
 
-View webinar details: ../register.html?demo_source=promotional_email
-
-DEMO PROJECT: Commonlight Studio, Lena Ortiz, and this event are fictional and were created to demonstrate Email Clarity’s implementation process. This is not a marketing email sent to subscribers.
+View webinar details: ../index.html?campaign_source=promotional_email

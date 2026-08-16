@@ -21,8 +21,26 @@ test("registration fields have explicit labels and no analytics PII interpolatio
   assert.doesNotMatch(js, /generate_lead|inquiry_success/);
 });
 
-test("case study and campaign experiences contain demo disclosure", async () => {
-  for (const page of ["index.html", "register.html", "email-previews.html"]) {
-    assert.match(await readFile(`site/${page}`, "utf8"), /Demo project:/, page);
+test("portfolio layers contain clear disclosure", async () => {
+  const caseStudy = await readFile("site/index.html", "utf8");
+  assert.match(caseStudy, /self-initiated concept/i);
+  assert.match(caseStudy, /fictional/i);
+  assert.match(caseStudy, /not client work/i);
+  assert.match(caseStudy, /no performance results/i);
+  assert.match(await readFile("site/email-previews.html", "utf8"), /Portfolio project:/);
+});
+
+test("campaign landing stays free of portfolio implementation language", async () => {
+  const html = await readFile("site/register.html", "utf8");
+  assert.doesNotMatch(html, /fictional|simulat|\bdemo\b|Brevo|dataLayer|GTM|GA4|test mode/i);
+  for (const image of ["conference-group-front.jpg", "conference_ortiz.jpg", "conference-group.jpg"]) {
+    assert.match(html, new RegExp(image));
+  }
+});
+
+test("email artifacts contain natural campaign copy without wrapper disclosures", async () => {
+  for (const page of ["promotional.html", "confirmation.html", "reminder.html", "follow-up.html"]) {
+    const html = await readFile(`site/emails/${page}`, "utf8");
+    assert.doesNotMatch(html, /fictional|demo project|demonstration/i, page);
   }
 });

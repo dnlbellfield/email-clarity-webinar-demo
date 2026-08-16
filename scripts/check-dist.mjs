@@ -1,11 +1,11 @@
 import { readFile, readdir } from "node:fs/promises";
 
 const expected = new Set([
-  "404.html", "assets/app.js", "assets/site.css", "automation.html", "confirmation.html",
+  "assets/app.js", "assets/images/conference-group-front.jpg", "assets/images/conference-group.jpg", "assets/images/conference_ortiz.jpg", "assets/site.css", "case-study.html", "confirmation.html",
   "email-previews.html", "emails/confirmation.html", "emails/follow-up.html",
   "emails/plain-text/confirmation.txt", "emails/plain-text/follow-up.txt",
   "emails/plain-text/promotional.txt", "emails/plain-text/reminder.txt", "emails/promotional.html",
-  "emails/reminder.html", "index.html", "privacy.html", "register.html", "tracking.html"
+  "emails/reminder.html", "index.html"
 ]);
 
 async function walk(directory, prefix = "") {

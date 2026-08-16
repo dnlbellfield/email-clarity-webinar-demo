@@ -10,5 +10,3 @@ Thursday, November 12, 2026
 45 minutes · Online
 
 We’ll send a reminder before the session.
-
-DEMO PROJECT: This event and message are fictional and were created to demonstrate Email Clarity’s implementation process. No real webinar attendance is expected.
