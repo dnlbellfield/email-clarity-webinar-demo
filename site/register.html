@@ -39,15 +39,17 @@
           <li class="flex gap-3"><span class="font-bold text-gold-500">✓</span><span>How to create a planning and approval rhythm your team can maintain.</span></li>
         </ul>
       </section>
-      <section class="card self-start" aria-labelledby="form-heading">
-        <h2 id="form-heading" class="text-3xl font-bold text-forest-950">Register for the webinar</h2>
-        <p class="mt-3 text-charcoal-700">All fields marked required must be completed.</p>
-        <form class="mt-7 space-y-5" data-registration-form novalidate>
-          <div><label class="font-bold" for="firstName">First name <span aria-hidden="true">*</span></label><input class="field" id="firstName" name="firstName" autocomplete="given-name" maxlength="80" required aria-describedby="firstName-error"><p class="field-error" id="firstName-error" aria-live="polite"></p></div>
+      <section id="demo-sequence" class="card self-start scroll-mt-6" aria-labelledby="form-heading">
+        <p class="eyebrow">Email Clarity inbox experience</p>
+        <h2 id="form-heading" class="mt-3 text-3xl font-bold text-forest-950">Experience the campaign</h2>
+        <p class="mt-3 leading-6 text-charcoal-700">Enter your email to receive the three-message Commonlight demonstration sequence. Commonlight Studio and the webinar are fictional; the emails will be sent by Email Clarity to demonstrate the implementation.</p>
+        <form class="mt-7 space-y-5" data-sequence-form novalidate>
           <div><label class="font-bold" for="email">Email address <span aria-hidden="true">*</span></label><input class="field" id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-describedby="email-error"><p class="field-error" id="email-error" aria-live="polite"></p></div>
-          <div><label class="font-bold" for="organization">Organization <span class="font-normal text-charcoal-700">(optional)</span></label><input class="field" id="organization" name="organization" autocomplete="organization" maxlength="120"></div>
-          <button class="button w-full disabled:cursor-wait disabled:opacity-65" type="submit">Register for the webinar</button>
-          <p class="text-sm text-charcoal-700">Submitting this form does not sign you up for marketing.</p>
+          <div><label class="font-bold" for="firstName">First name <span class="font-normal text-charcoal-700">(optional)</span></label><input class="field" id="firstName" name="firstName" autocomplete="given-name" maxlength="80"></div>
+          <div><label class="flex cursor-pointer items-start gap-3" for="sequenceConsent"><input class="mt-1 size-5 shrink-0 accent-forest-800" id="sequenceConsent" name="sequenceConsent" type="checkbox" required aria-describedby="sequenceConsent-error"><span class="text-sm leading-6">I’d like Email Clarity to send me the three-email Commonlight demonstration sequence. I understand that this is a fictional campaign and that I can unsubscribe at any time.</span></label><p class="field-error" id="sequenceConsent-error" aria-live="polite"></p></div>
+          <button class="button w-full disabled:cursor-wait disabled:opacity-65" type="submit">Send the demo sequence</button>
+          <p class="text-sm leading-6 text-charcoal-700">After confirming your address, the three demonstration emails will arrive over approximately 15 minutes. You will not be added to a general marketing list.</p>
+          <p class="rounded-xl bg-gold-300/25 p-3 text-sm text-forest-950"><strong>Current status:</strong> Public inbox delivery is not active yet. This local form demonstrates validation and the handoff interface without storing your details or sending email.</p>
           <p class="text-sm font-semibold" data-form-status role="status" tabindex="-1"></p>
         </form>
       </section>

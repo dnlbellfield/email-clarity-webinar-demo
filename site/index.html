@@ -26,7 +26,7 @@
           <h1 class="display">One webinar campaign, implemented end to end.</h1>
           <p class="lede">Promotional email development, a responsive registration experience, a protected Brevo handoff, safe local tracking events, and production QA—all working as one flow.</p>
           <div class="mt-8 flex flex-wrap gap-4">
-            <a class="button" href="/">Experience the Commonlight campaign</a>
+            <a class="button" href="/" data-track-sequence-cta>Experience the Commonlight campaign</a>
             <a class="button-secondary" href="/email-previews.html">View campaign emails</a>
           </div>
         </div>
@@ -45,8 +45,8 @@
         <h2 class="section-title mt-3">A clear path from invitation to follow-up</h2>
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           <article class="card"><span class="tag">01</span><h3 class="mt-5 text-xl font-bold">Email</h3><p class="mt-3 text-charcoal-700">Resilient HTML and plain-text versions for the invitation and automation sequence.</p></article>
-          <article class="card"><span class="tag">02</span><h3 class="mt-5 text-xl font-bold">Registration</h3><p class="mt-3 text-charcoal-700">An accessible landing page, validated form, and confirmation experience.</p></article>
-          <article class="card"><span class="tag">03</span><h3 class="mt-5 text-xl font-bold">Automation</h3><p class="mt-3 text-charcoal-700">A protected server-side handoff designed for one controlled Brevo workflow.</p></article>
+          <article class="card"><span class="tag">02</span><h3 class="mt-5 text-xl font-bold">Opt-in</h3><p class="mt-3 text-charcoal-700">A minimal form with explicit consent, an inactive local handoff, and a double-opt-in integration plan.</p></article>
+          <article class="card"><span class="tag">03</span><h3 class="mt-5 text-xl font-bold">Automation</h3><p class="mt-3 text-charcoal-700">A planned isolated Brevo sequence: confirmation, reminder, and follow-up on an accelerated schedule.</p></article>
           <article class="card"><span class="tag">04</span><h3 class="mt-5 text-xl font-bold">Measurement</h3><p class="mt-3 text-charcoal-700">Local dataLayer events with fixed values that exclude names, emails, and form contents. GTM and GA4 are deferred.</p></article>
         </div>
       </div>
@@ -75,16 +75,16 @@
         <p class="eyebrow">Implementation status</p>
         <h2 class="section-title mt-3">What works locally, and what remains external</h2>
         <div class="mt-8 grid gap-6 md:grid-cols-2">
-          <article class="card"><h3 class="text-xl font-bold text-forest-950">Implemented and tested</h3><ul class="mt-5 list-disc space-y-2 pl-5 text-charcoal-700"><li>Responsive registration and confirmation flow</li><li>HTML and plain-text campaign emails</li><li>Accessible validation and keyboard states</li><li>Server-side allowlist and Brevo contact mapping</li><li>PII-safe local dataLayer events</li><li>Allowlisted production build and automated checks</li></ul></article>
-          <article class="card"><h3 class="text-xl font-bold text-forest-950">Previewed or deferred</h3><ul class="mt-5 list-disc space-y-2 pl-5 text-charcoal-700"><li>Public registration completes locally without creating a contact or sending email</li><li>Brevo test delivery awaits approved credentials and test addresses</li><li>GTM, GA4, deployment, and public email delivery are not connected</li><li>No client relationship, attendance, conversion, or performance result is claimed</li></ul></article>
+          <article class="card"><h3 class="text-xl font-bold text-forest-950">Implemented and tested</h3><ul class="mt-5 list-disc space-y-2 pl-5 text-charcoal-700"><li>Responsive campaign landing and confirmation states</li><li>Minimal email and optional first-name fields</li><li>Explicit unchecked consent and accessible validation</li><li>Inactive server-side request contract with no storage or delivery</li><li>HTML and plain-text campaign emails</li><li>PII-safe local dataLayer events</li><li>Allowlisted production build and automated checks</li></ul></article>
+          <article class="card"><h3 class="text-xl font-bold text-forest-950">Required before activation</h3><ul class="mt-5 list-disc space-y-2 pl-5 text-charcoal-700"><li>Approved Brevo double opt-in lists and automation</li><li>Authenticated sending domain and required sender details</li><li>Privacy language, bot protection, and unsubscribe behavior</li><li>Documented retention and deletion policy</li><li>GTM/GA4 consent configuration and public deployment</li><li>No client relationship, attendance, conversion, or performance result is claimed</li></ul></article>
         </div>
       </div>
     </section>
 
     <section class="section bg-forest-950 text-white">
       <div class="shell grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-        <div><p class="text-sm font-bold uppercase tracking-[.16em] text-gold-300">Explore the work</p><h2 class="mt-3 text-3xl font-bold sm:text-4xl">Step into the attendee experience.</h2><p class="mt-4 max-w-2xl text-cream-100">Open the Commonlight registration page, or inspect the promotional and automation email sequence from the portfolio layer.</p></div>
-        <div class="flex flex-wrap gap-3"><a class="inline-flex min-h-12 items-center justify-center rounded-full bg-gold-300 px-6 py-3 font-bold text-forest-950 no-underline hover:bg-white" href="/">Experience campaign</a><a class="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-cream-100 px-6 py-3 font-bold text-white no-underline hover:bg-white hover:text-forest-950" href="/email-previews.html">View emails</a></div>
+        <div><p class="text-sm font-bold uppercase tracking-[.16em] text-gold-300">Experience it in your inbox</p><h2 class="mt-3 text-3xl font-bold sm:text-4xl">Want to see the automation in action?</h2><p class="mt-4 max-w-2xl text-cream-100">Request the three-email Commonlight demonstration sequence from the campaign landing page, or inspect every message now. Public delivery remains inactive until the sending configuration is approved.</p></div>
+        <div class="flex flex-wrap gap-3"><a class="inline-flex min-h-12 items-center justify-center rounded-full bg-gold-300 px-6 py-3 font-bold text-forest-950 no-underline hover:bg-white" href="/#demo-sequence" data-track-sequence-cta>Send me the demo sequence</a><a class="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-cream-100 px-6 py-3 font-bold text-white no-underline hover:bg-white hover:text-forest-950" href="/email-previews.html">View emails</a></div>
       </div>
     </section>
   </main>

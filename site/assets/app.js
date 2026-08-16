@@ -1,14 +1,14 @@
 const page = document.body.dataset.page || "unknown";
 const allowedEvents = new Set([
-  "demo_email_cta_click",
-  "demo_landing_view",
-  "demo_registration_form_start",
-  "demo_registration_attempt",
-  "demo_registration_success",
-  "demo_email_preview"
+  "demo_sequence_cta_click",
+  "demo_sequence_request",
+  "demo_sequence_confirmation_view",
+  "demo_sequence_confirmed",
+  "demo_email_preview",
+  "demo_project_cta_click"
 ]);
 
-let mode = "preview";
+let sequenceMode = "inactive";
 
 function fixedValue(value) {
   return typeof value === "string" && /^[a-z0-9_-]{1,40}$/.test(value);
@@ -25,14 +25,14 @@ function track(event, parameters = {}) {
   window.dataLayer.push(detail);
 }
 
-async function getMode() {
+async function getSequenceMode() {
   try {
-    const response = await fetch("/.netlify/functions/register", { headers: { Accept: "application/json" } });
+    const response = await fetch("/.netlify/functions/demo-sequence", { headers: { Accept: "application/json" } });
     if (!response.ok) return;
     const data = await response.json();
-    mode = data.mode === "test" ? "test" : "preview";
+    sequenceMode = data.mode === "active" ? "active" : "inactive";
   } catch {
-    mode = "preview";
+    sequenceMode = "inactive";
   }
 }
 
@@ -44,96 +44,94 @@ function setError(input, message) {
 
 function validate(form) {
   let valid = true;
-  const firstName = form.elements.firstName;
   const email = form.elements.email;
-  setError(firstName, "");
+  const consent = form.elements.sequenceConsent;
   setError(email, "");
-  if (!firstName.value.trim()) {
-    setError(firstName, "Enter your first name.");
-    valid = false;
-  }
+  setError(consent, "");
   if (!email.value.trim() || !email.validity.valid) {
     setError(email, "Enter a valid email address.");
+    valid = false;
+  }
+  if (!consent.checked) {
+    setError(consent, "Select the checkbox to consent to the three-email sequence.");
     valid = false;
   }
   return valid;
 }
 
-function initForm() {
-  const form = document.querySelector("[data-registration-form]");
+function initSequenceForm() {
+  const form = document.querySelector("[data-sequence-form]");
   if (!form) return;
-  let started = false;
-  form.addEventListener("input", () => {
-    if (!started) {
-      started = true;
-      track("demo_registration_form_start", { demo_mode: mode });
-    }
-  });
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!validate(form)) {
       document.querySelector('[aria-invalid="true"]')?.focus();
       return;
     }
-    track("demo_registration_attempt", { demo_mode: mode, validation_result: "valid" });
+
     const button = form.querySelector('button[type="submit"]');
     const status = document.querySelector("[data-form-status]");
     button.disabled = true;
-    button.textContent = "Registering…";
-    status.textContent = "Submitting your registration.";
+    button.textContent = "Preparing the sequence…";
+    status.textContent = "Validating your request.";
+
+    let result = { success: true, delivery: "inactive" };
     try {
-      let result = { mode: "preview", success: true };
-      try {
-        const response = await fetch("/.netlify/functions/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            firstName: form.elements.firstName.value.trim(),
-            email: form.elements.email.value.trim(),
-            organization: form.elements.organization.value.trim()
-          })
-        });
-        result = await response.json();
-        if (!response.ok) throw new Error(result.message || "Registration could not be completed.");
-      } catch (error) {
-        if (mode === "test") throw error;
-      }
-      sessionStorage.setItem("commonlight_demo_registration", result.mode === "test" ? "test" : "preview");
-      track("demo_registration_success", { demo_mode: result.mode === "test" ? "test" : "preview" });
-      window.location.assign("/confirmation.html");
+      const response = await fetch("/.netlify/functions/demo-sequence", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          email: form.elements.email.value.trim(),
+          firstName: form.elements.firstName.value.trim(),
+          consent: form.elements.sequenceConsent.checked
+        })
+      });
+      const responseBody = await response.json();
+      if (!response.ok) throw new Error(responseBody.message || "The request could not be validated.");
+      result = responseBody;
     } catch (error) {
-      status.textContent = error.message || "Registration could not be completed. Please try again.";
-      button.disabled = false;
-      button.textContent = "Register for the webinar";
-      status.focus();
+      if (sequenceMode === "active") {
+        status.textContent = error.message || "The request could not be completed. Please try again.";
+        button.disabled = false;
+        button.textContent = "Send the demo sequence";
+        status.focus();
+        return;
+      }
     }
+
+    sessionStorage.setItem("commonlight_sequence_delivery", result.delivery === "active" ? "active" : "inactive");
+    track("demo_sequence_request", { delivery_mode: result.delivery === "active" ? "active" : "inactive" });
+    window.location.assign("/confirmation.html");
   });
 }
 
 function initInteractiveTracking() {
-  document.querySelectorAll("[data-track-email-cta]").forEach((link) => link.addEventListener("click", () => {
-    track("demo_email_cta_click", { email_type: link.dataset.trackEmailCta });
+  document.querySelectorAll("[data-track-sequence-cta]").forEach((link) => link.addEventListener("click", () => {
+    track("demo_sequence_cta_click", { placement: page });
   }));
   document.querySelectorAll("[data-email-preview]").forEach((element) => {
     track("demo_email_preview", { email_type: element.dataset.emailPreview });
   });
+  document.querySelectorAll("[data-track-project-cta]").forEach((link) => link.addEventListener("click", () => {
+    track("demo_project_cta_click", { placement: page });
+  }));
 }
 
 function initConfirmation() {
   const element = document.querySelector("[data-confirmation-mode]");
   if (!element) return;
-  const result = sessionStorage.getItem("commonlight_demo_registration");
-  element.textContent = result === "test"
-    ? "This approved test registration was sent securely to Brevo."
-    : "No contact was created and no email was sent.";
+  const delivery = sessionStorage.getItem("commonlight_sequence_delivery") === "active" ? "active" : "inactive";
+  element.textContent = delivery === "active"
+    ? "Check your inbox for the Email Clarity confirmation message. The sequence will begin only after you confirm your address."
+    : "This local request was validated only. No details were stored and no email was sent.";
+  track("demo_sequence_confirmation_view", { delivery_mode: delivery });
 }
 
 window.dataLayer = window.dataLayer || [];
-getMode();
-initForm();
+getSequenceMode();
+initSequenceForm();
 initInteractiveTracking();
 initConfirmation();
-track("demo_landing_view", { page_name: page });
 if (new URLSearchParams(window.location.search).get("campaign_source") === "promotional_email") {
-  track("demo_email_cta_click", { email_type: "promotional" });
+  track("demo_sequence_cta_click", { placement: "promotional_email" });
 }
