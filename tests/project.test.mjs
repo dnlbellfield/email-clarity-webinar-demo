@@ -93,8 +93,6 @@ test("navigation preserves the campaign and portfolio hierarchy", async () => {
 });
 
 test("inbox sequence is explicitly labeled and unsubscribable", async () => {
-  const promotional = await readFile("site/emails/promotional.html", "utf8");
-  assert.doesNotMatch(promotional, /demo project|demonstration/i);
   const doubleOptIn = await readFile("site/emails/double-opt-in.html", "utf8");
   assert.match(doubleOptIn, /Confirm your Commonlight demo sequence/i);
   for (const [page, position] of [["confirmation.html", "1"], ["reminder.html", "2"], ["follow-up.html", "3"]]) {
@@ -105,30 +103,16 @@ test("inbox sequence is explicitly labeled and unsubscribable", async () => {
   }
 });
 
-test("promotional invitation uses the tested foundation and absolute campaign URLs", async () => {
-  const html = await readFile("site/emails/promotional.html", "utf8");
-  assert.match(html, /<o:OfficeDocumentSettings>/);
-  assert.match(html, /Preview Text Spacing Hack : BEGIN/);
-  assert.match(html, /Online workshop/);
-  assert.match(html, /Make content easier to plan, reuse, and approve/);
-  assert.match(html, /conference-group-front-email\.jpg/);
-  assert.match(html, /workshop_ct\.png/);
-  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/\?campaign_source=promotional_email/);
-  assert.match(html, /\{\{ unsubscribe \}\}/);
-  assert.doesNotMatch(html, /11:50 a\.m\.|Meet your opening speaker|ortiz_profie_/);
-  assert.doesNotMatch(html, /(?:href|src)="\.\.?\//);
-  assert.doesNotMatch(html, /demo project|demonstration|fictional/i);
-});
-
-test("email preview index describes the current five-message journey", async () => {
+test("public email journey excludes the archival invitation and plain-text files", async () => {
   const html = await readFile("site/email-previews.html", "utf8");
-  assert.match(html, /One invitation, one opt-in, and three connected sequence emails/);
+  const build = await readFile("scripts/build.mjs", "utf8");
+  assert.match(html, /One consent confirmation and three connected sequence emails/);
   assert.match(html, /Workshop details and program/);
   assert.match(html, /About 15 minutes after Demo 1/);
   assert.match(html, /Content-planning recap/);
   assert.match(html, /Consent confirmation · Required first/);
-  assert.doesNotMatch(html, /Plain-text version|transactional/i);
-  assert.doesNotMatch(html, /Registration confirmation|Resource follow-up/);
+  assert.doesNotMatch(html, /Invitation|promotional|Plain-text version|transactional/i);
+  assert.doesNotMatch(build, /site\/emails\/promotional|site\/emails\/plain-text/);
 });
 
 test("Demo 1 preserves the tested email-client foundation", async () => {

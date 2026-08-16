@@ -25,7 +25,6 @@ const entries = [
   "site/emails/double-opt-in.html",
   "site/emails/confirmation.html",
   "site/emails/reminder.html",
-  "site/emails/follow-up.html",
   "site/emails/follow-up.html"
 ].map((entry) => typeof entry === "string" ? { source: entry, output: entry.replace(/^site\//, "") } : entry);
 
