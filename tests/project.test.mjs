@@ -123,3 +123,9 @@ test("Demo 1 preserves the tested email-client foundation", async () => {
   assert.match(html, /workshop_ct\.png/);
   assert.doesNotMatch(html, /WNET|THIRTEEN|AMPscript|%%|image\.email/i);
 });
+
+test("email previews permit inline email CSS without relaxing the main site", async () => {
+  const config = await readFile("netlify.toml", "utf8");
+  assert.match(config, /for = "\/emails\/\*"[\s\S]*?style-src 'unsafe-inline'/);
+  assert.match(config, /for = "\/\*"[\s\S]*?style-src 'self';/);
+});

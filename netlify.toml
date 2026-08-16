@@ -19,6 +19,7 @@
   for = "/emails/*"
   [headers.values]
     X-Robots-Tag = "noindex"
+    Content-Security-Policy = "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'"
 
 [[redirects]]
   from = "/register"
