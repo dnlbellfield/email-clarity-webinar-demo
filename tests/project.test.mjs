@@ -121,6 +121,7 @@ test("Demo 1 preserves the tested email-client foundation", async () => {
   assert.match(html, /conference-group-front\.jpg/);
   assert.match(html, /ortiz_profie_\.png/);
   assert.match(html, /workshop_ct\.png/);
+  assert.match(html, /<td align="center"\s+style="padding: 0;">\s*<p[^>]+text-align: left;/);
   assert.doesNotMatch(html, /WNET|THIRTEEN|AMPscript|%%|image\.email/i);
 });
 
