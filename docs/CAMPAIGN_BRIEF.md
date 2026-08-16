@@ -20,4 +20,4 @@ Commonlight Studio, the workshop, and all four speakers are fictional. This is a
 
 ## Scope
 
-The implementation demonstrates promotional email, a public double-opt-in request, secure Brevo contact and list management, a three-message automation, consent and unsubscribe behavior, safe non-PII event design, accessibility, and QA. GA4/GTM and public deployment remain outside the current controlled-test milestone.
+The implementation demonstrates a public double-opt-in request, secure Brevo contact and list management, a three-message automation, consent and unsubscribe behavior, safe non-PII event design, accessibility, and QA. GA4/GTM and public deployment remain outside the current controlled-test milestone.

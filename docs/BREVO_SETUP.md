@@ -62,7 +62,7 @@ The visitor does not enter these values; the server and automation set them. Do 
 
 ## 5. Create the email templates
 
-Create one Email Clarity double-opt-in template and three Commonlight sequence templates using the HTML/plain-text artifacts in `site/emails/`:
+Create one Email Clarity double-opt-in template and three Commonlight sequence templates using the HTML artifacts in `site/emails/`:
 
 1. `Confirm your Commonlight demo sequence` — sender Email Clarity; link the CTA to the absolute production `/sequence-confirmed.html?confirmation=brevo` URL.
 2. `[Demo 1/3] Your workshop details: A Practical Content System`

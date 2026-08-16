@@ -22,16 +22,11 @@ const entries = [
   "site/assets/images/ortiz_conf.jpeg",
   "site/assets/images/ortiz_profie_.png",
   "site/assets/images/workshop_ct.png",
-  "site/emails/promotional.html",
   "site/emails/double-opt-in.html",
   "site/emails/confirmation.html",
   "site/emails/reminder.html",
   "site/emails/follow-up.html",
-  "site/emails/plain-text/promotional.txt",
-  "site/emails/plain-text/double-opt-in.txt",
-  "site/emails/plain-text/confirmation.txt",
-  "site/emails/plain-text/reminder.txt",
-  "site/emails/plain-text/follow-up.txt"
+  "site/emails/follow-up.html"
 ].map((entry) => typeof entry === "string" ? { source: entry, output: entry.replace(/^site\//, "") } : entry);
 
 await rm(dist, { recursive: true, force: true });
