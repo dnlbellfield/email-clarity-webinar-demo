@@ -104,3 +104,21 @@ test("inbox sequence is explicitly labeled and unsubscribable", async () => {
     assert.match(html, /\{\{ unsubscribe \}\}/, page);
   }
 });
+
+test("Demo 1 preserves the tested email-client foundation", async () => {
+  const html = await readFile("site/emails/confirmation.html", "utf8");
+  for (const marker of [
+    "xmlns:v=\"urn:schemas-microsoft-com:vml\"",
+    "<o:OfficeDocumentSettings>",
+    "<!--[if mso]>",
+    "mso-table-lspace: 0pt !important",
+    "@media only screen and (min-device-width: 320px)",
+    ".stack-column-center",
+    "Preview Text Spacing Hack : BEGIN",
+    "max-width: 680px"
+  ]) assert.match(html, new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), marker);
+
+  assert.match(html, /conference-group-front\.jpg/);
+  assert.match(html, /ortiz_profie_\.png/);
+  assert.doesNotMatch(html, /WNET|THIRTEEN|AMPscript|%%|image\.email/i);
+});
