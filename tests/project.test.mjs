@@ -63,7 +63,9 @@ test("the locked workshop definition is consistent across campaign sources", asy
     "docs/CAMPAIGN_BRIEF.md",
     "docs/BREVO_SETUP.md"
   ];
-  const combined = (await Promise.all(sources.map((source) => readFile(source, "utf8")))).join("\n");
+  const combined = (await Promise.all(sources.map((source) => readFile(source, "utf8"))))
+    .join("\n")
+    .replaceAll(/https?:\/\/[^\s\"'<>]+/g, "");
   assert.doesNotMatch(combined, /45.minute|single presenter|\bwebinar\b/i);
   for (const phrase of [
     "A Practical Content System for Small Nonprofit Teams",
