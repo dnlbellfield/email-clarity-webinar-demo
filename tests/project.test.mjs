@@ -110,11 +110,12 @@ test("promotional invitation uses the tested foundation and absolute campaign UR
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
   assert.match(html, /Online workshop/);
+  assert.match(html, /Make content easier to plan, reuse, and approve/);
   assert.match(html, /conference-group-front-email\.jpg/);
   assert.match(html, /workshop_ct\.png/);
-  assert.match(html, /ortiz_profie_\.png/);
   assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/\?campaign_source=promotional_email/);
   assert.match(html, /\{\{ unsubscribe \}\}/);
+  assert.doesNotMatch(html, /11:50 a\.m\.|Meet your opening speaker|ortiz_profie_/);
   assert.doesNotMatch(html, /(?:href|src)="\.\.?\//);
   assert.doesNotMatch(html, /demo project|demonstration|fictional/i);
 });
@@ -125,6 +126,8 @@ test("email preview index describes the current five-message journey", async () 
   assert.match(html, /Workshop details and program/);
   assert.match(html, /About 15 minutes after Demo 1/);
   assert.match(html, /Content-planning recap/);
+  assert.match(html, /Consent confirmation · Required first/);
+  assert.doesNotMatch(html, /Plain-text version|transactional/i);
   assert.doesNotMatch(html, /Registration confirmation|Resource follow-up/);
 });
 
