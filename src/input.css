@@ -1,0 +1,51 @@
+@import "tailwindcss" source("../site");
+
+@theme {
+  --color-forest-950: #132d25;
+  --color-forest-800: #1f493b;
+  --color-forest-700: #2b604d;
+  --color-gold-500: #e0ac3e;
+  --color-gold-300: #f1cd72;
+  --color-cream-50: #fbf7ed;
+  --color-cream-100: #f4ecd8;
+  --color-charcoal-900: #262a27;
+  --color-charcoal-700: #4c514d;
+  --font-sans: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  --shadow-soft: 0 20px 55px rgb(19 45 37 / 0.12);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply m-0 bg-cream-50 font-sans text-charcoal-900 antialiased; }
+  a { @apply underline decoration-forest-700/35 underline-offset-4; }
+  a:hover { @apply decoration-forest-700; }
+  :focus-visible { @apply outline-3 outline-offset-3 outline-gold-500; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  button, input { font: inherit; }
+}
+
+@layer components {
+  .shell { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  .site-header { @apply border-b border-forest-950/10 bg-cream-50/95; }
+  .nav-link { @apply rounded px-2 py-2 text-sm font-semibold text-forest-950 no-underline; }
+  .eyebrow { @apply text-sm font-bold uppercase tracking-[0.16em] text-forest-700; }
+  .display { @apply mt-4 max-w-4xl text-4xl leading-[1.05] font-bold tracking-[-0.035em] text-forest-950 sm:text-6xl; }
+  .lede { @apply mt-6 max-w-3xl text-lg leading-8 text-charcoal-700 sm:text-xl; }
+  .section { @apply py-16 sm:py-24; }
+  .section-title { @apply text-3xl font-bold tracking-[-0.025em] text-forest-950 sm:text-4xl; }
+  .card { @apply rounded-3xl border border-forest-950/10 bg-white p-6 shadow-soft sm:p-8; }
+  .button { @apply inline-flex min-h-12 items-center justify-center rounded-full bg-forest-800 px-6 py-3 font-bold text-white no-underline transition hover:bg-forest-950; }
+  .button-secondary { @apply inline-flex min-h-12 items-center justify-center rounded-full border-2 border-forest-800 px-6 py-3 font-bold text-forest-950 no-underline transition hover:bg-cream-100; }
+  .tag { @apply inline-flex rounded-full bg-gold-300/45 px-3 py-1 text-sm font-bold text-forest-950; }
+  .demo-note { @apply border-y border-gold-500/35 bg-gold-300/25 py-3 text-sm text-forest-950; }
+  .field { @apply mt-2 w-full rounded-xl border border-charcoal-700/40 bg-white px-4 py-3 text-charcoal-900 shadow-sm; }
+  .field-error { @apply mt-2 text-sm font-semibold text-red-800; }
+  .email-frame { @apply mx-auto block min-h-[760px] w-full max-w-[700px] rounded-2xl border border-forest-950/15 bg-white shadow-soft; }
+  .flow-step { @apply relative rounded-2xl border border-forest-950/10 bg-white p-5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "email-clarity-webinar-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss -i src/input.css -o .build/site.css --minify",
+    "build": "npm run build:css && node scripts/build.mjs",
+    "check": "node --test && node scripts/check-dist.mjs",
+    "preview": "npx serve dist",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.12",
+    "tailwindcss": "^4.1.12"
+  }
+}
