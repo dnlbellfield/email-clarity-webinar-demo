@@ -121,6 +121,7 @@ test("Demo 1 preserves the tested email-client foundation", async () => {
   assert.match(html, /conference-group-front\.jpg/);
   assert.match(html, /ortiz_profie_\.png/);
   assert.match(html, /workshop_ct\.png/);
+  assert.match(html, /<td align="left" width="70%" style="width:70%;[^>]*>Commonlight Studio<\/td>\s*<td align="right" width="30%" style="width:30%;[^>]*>Demo 1 of 3<\/td>/);
   assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/" style="color:#1f493b; font-weight:bold; text-decoration:underline;">A Practical Content System for Small Nonprofit Teams<\/a>/);
   assert.match(html, /We&rsquo;d love to see you there\. <a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/"[^>]*>View the workshop page\.<\/a>/);
   assert.match(html, /<td align="center"\s+style="padding: 0;">\s*<p[^>]+text-align: left;/);
