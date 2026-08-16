@@ -128,6 +128,16 @@ test("Demo 1 preserves the tested email-client foundation", async () => {
   assert.doesNotMatch(html, /WNET|THIRTEEN|AMPscript|%%|image\.email/i);
 });
 
+test("double opt-in uses the tested foundation and production confirmation link", async () => {
+  const html = await readFile("site/emails/double-opt-in.html", "utf8");
+  assert.match(html, /<o:OfficeDocumentSettings>/);
+  assert.match(html, /Preview Text Spacing Hack : BEGIN/);
+  assert.match(html, /Confirmation required/);
+  assert.match(html, /confirm-demo-sequence\.png/);
+  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/sequence-confirmed\.html\?confirmation=brevo/);
+  assert.doesNotMatch(html, /localhost|double_opt_in_url/);
+});
+
 test("email previews permit inline email CSS without relaxing the main site", async () => {
   const config = await readFile("netlify.toml", "utf8");
   assert.match(config, /for = "\/emails\/\*"[\s\S]*?style-src 'unsafe-inline'/);

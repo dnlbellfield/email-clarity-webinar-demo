@@ -1,12 +1,15 @@
 SUBJECT: Confirm your Commonlight demo sequence
 PREHEADER: Confirm your address to begin the three-email demonstration.
 
-START THE COMMONLIGHT DEMO SEQUENCE
+CONFIRM YOUR EMAIL TO START THE SEQUENCE
 
-You requested three fictional Commonlight campaign emails from Email Clarity. Confirm your address to begin the accelerated sequence.
+You asked Email Clarity to send you the three-email Commonlight demonstration sequence.
 
-The sequence is separate from general marketing, and you can unsubscribe at any time.
+Confirming verifies your address and starts the three campaign emails on an accelerated schedule over approximately 15 minutes.
 
-Confirm your address: {{ double_opt_in_url }}
+This request applies only to the Commonlight demonstration. It does not add you to a newsletter or unrelated marketing, and every campaign email includes an unsubscribe link.
+
+Confirm and start the sequence:
+https://email-clarity-webinar-demo.netlify.app/sequence-confirmed.html?confirmation=brevo
 
 If you did not request this demonstration, no action is needed. The sequence will not begin unless you confirm.
