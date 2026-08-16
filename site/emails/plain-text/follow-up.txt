@@ -1,5 +1,5 @@
-SUBJECT: Resources from A Practical Content System for Small Nonprofit Teams
-PREHEADER: A simple recap to help you put the content system into practice.
+SUBJECT: [Demo 3/3] Your Commonlight content-planning resources
+PREHEADER: The final message in your Commonlight demonstration sequence.
 
 KEEP THE SYSTEM PRACTICAL
 
@@ -7,4 +7,8 @@ Thanks for your interest in A Practical Content System for Small Nonprofit Teams
 
 Start with a small set of recurring themes, reuse strong ideas across channels, and choose a review rhythm your team can maintain.
 
-Review the session outline: ../index.html
+Need help implementing a campaign like this?
+Discuss your project with Email Clarity: ../case-study.html?campaign_source=project_cta
+
+Demo 3 of 3. This is the final message in the sequence; no newsletter or unrelated marketing follows. Commonlight Studio and the webinar are fictional.
+Unsubscribe: {{ unsubscribe }}

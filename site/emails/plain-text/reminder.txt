@@ -1,5 +1,5 @@
-SUBJECT: Reminder: A Practical Content System for Small Nonprofit Teams is tomorrow
-PREHEADER: The webinar begins tomorrow at 11 a.m. Pacific.
+SUBJECT: [Demo 2/3] Reminder: A Practical Content System
+PREHEADER: The second message in your accelerated Commonlight demonstration sequence.
 
 A PRACTICAL CONTENT SYSTEM FOR SMALL NONPROFIT TEAMS
 
@@ -10,3 +10,6 @@ Thursday, November 12, 2026
 45 minutes · Online
 
 View event details: ../index.html
+
+Demo 2 of 3. This reminder was sent on an accelerated schedule as part of an Email Clarity demonstration. Commonlight Studio and the webinar are fictional.
+Unsubscribe: {{ unsubscribe }}
