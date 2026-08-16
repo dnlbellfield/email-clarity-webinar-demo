@@ -38,6 +38,18 @@ test("campaign landing stays free of portfolio implementation language", async (
   }
 });
 
+test("navigation preserves the campaign and portfolio hierarchy", async () => {
+  const caseStudy = await readFile("site/index.html", "utf8");
+  const campaign = await readFile("site/register.html", "utf8");
+  const emails = await readFile("site/email-previews.html", "utf8");
+  assert.match(caseStudy, /href="\/">Experience the Commonlight campaign/);
+  assert.match(caseStudy, /href="\/email-previews\.html">View campaign emails/);
+  assert.doesNotMatch(caseStudy, /href="\/confirmation\.html"/);
+  assert.doesNotMatch(campaign, /href="\/email-previews\.html"/);
+  assert.match(campaign, /href="\/case-study\.html">View the Email Clarity project case study/);
+  assert.match(emails, /href="\/case-study\.html">Back to project case study/);
+});
+
 test("email artifacts contain natural campaign copy without wrapper disclosures", async () => {
   for (const page of ["promotional.html", "confirmation.html", "reminder.html", "follow-up.html"]) {
     const html = await readFile(`site/emails/${page}`, "utf8");

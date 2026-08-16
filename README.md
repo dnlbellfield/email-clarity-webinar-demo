@@ -16,10 +16,10 @@ Open `http://localhost:8080`. Static preview mode works without credentials. Net
 
 ## Local routes
 
-- `/` — Commonlight Studio webinar landing page and registration form
+- `/case-study.html` — primary portfolio entry, transparent project disclosure, implementation details, and testing status
+- `/` — Commonlight Studio attendee experience: webinar landing page and registration form
 - `/confirmation.html` — campaign confirmation state
 - `/email-previews.html` — four email previews inside the Email Clarity portfolio wrapper
-- `/case-study.html` — transparent project disclosure, implementation details, and testing status
 
 ## Checks
 
