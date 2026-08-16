@@ -140,7 +140,7 @@ test("Demo 2 uses the approved tested email foundation", async () => {
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
   assert.match(html, /Demo 2 of 3/);
   assert.match(html, /Your practical content workshop starts tomorrow/);
-  assert.match(html, /conference-group\.jpg/);
+  assert.match(html, /background-color:#1f493b/);
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /ortiz_profie_\.png/);
 });
