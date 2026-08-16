@@ -16,6 +16,7 @@ const entries = [
   "site/assets/images/conference_ortiz.jpg",
   "site/assets/images/ortiz_conf.jpeg",
   "site/assets/images/ortiz_profie_.png",
+  "site/assets/images/workshop_ct.png",
   "site/emails/promotional.html",
   "site/emails/double-opt-in.html",
   "site/emails/confirmation.html",
