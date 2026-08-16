@@ -133,3 +133,13 @@ test("email previews permit inline email CSS without relaxing the main site", as
   assert.match(config, /for = "\/emails\/\*"[\s\S]*?style-src 'unsafe-inline'/);
   assert.match(config, /for = "\/\*"[\s\S]*?style-src 'self';/);
 });
+
+test("Demo 2 uses the approved tested email foundation", async () => {
+  const html = await readFile("site/emails/reminder.html", "utf8");
+  assert.match(html, /<o:OfficeDocumentSettings>/);
+  assert.match(html, /Preview Text Spacing Hack : BEGIN/);
+  assert.match(html, /Demo 2 of 3/);
+  assert.match(html, /Your practical content workshop starts tomorrow/);
+  assert.match(html, /workshop_ct\.png/);
+  assert.match(html, /ortiz_profie_\.png/);
+});
