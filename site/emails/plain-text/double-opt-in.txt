@@ -1,0 +1,12 @@
+SUBJECT: Confirm your Commonlight demo sequence
+PREHEADER: Confirm your address to begin the three-email demonstration.
+
+START THE COMMONLIGHT DEMO SEQUENCE
+
+You requested three fictional Commonlight campaign emails from Email Clarity. Confirm your address to begin the accelerated sequence.
+
+The sequence is separate from general marketing, and you can unsubscribe at any time.
+
+Confirm your address: {{ double_opt_in_url }}
+
+If you did not request this demonstration, no action is needed. The sequence will not begin unless you confirm.
