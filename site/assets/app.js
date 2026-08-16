@@ -194,5 +194,9 @@ getMode();
 initForm();
 initInteractiveTracking();
 initConfirmation();
-if (analyticsConsent) track("demo_landing_view", { page_name: page });
-
+if (analyticsConsent) {
+  track("demo_landing_view", { page_name: page });
+  if (new URLSearchParams(window.location.search).get("demo_source") === "promotional_email") {
+    track("demo_email_cta_click", { email_type: "promotional" });
+  }
+}

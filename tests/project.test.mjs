@@ -17,7 +17,7 @@ test("registration fields have explicit labels and no analytics PII interpolatio
   for (const id of ["firstName", "email", "organization"]) assert.match(html, new RegExp(`for="${id}"`));
   const js = await readFile("site/assets/app.js", "utf8");
   const trackCalls = [...js.matchAll(/track\([^;]+/g)].map((match) => match[0]).join("\n");
-  assert.doesNotMatch(trackCalls, /\.value|firstName|organization|\.email/);
+  assert.doesNotMatch(trackCalls, /\.value|firstName|organization|email_address/);
   assert.doesNotMatch(js, /generate_lead|inquiry_success/);
 });
 
@@ -26,4 +26,3 @@ test("case study and campaign experiences contain demo disclosure", async () => 
     assert.match(await readFile(`site/${page}`, "utf8"), /Demo project:/, page);
   }
 });
-

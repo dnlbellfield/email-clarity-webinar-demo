@@ -7,7 +7,7 @@
     "build:css": "tailwindcss -i src/input.css -o .build/site.css --minify",
     "build": "npm run build:css && node scripts/build.mjs",
     "check": "node --test && node scripts/check-dist.mjs",
-    "preview": "npx serve dist",
+    "preview": "python3 -m http.server 8080 --directory dist",
     "test": "node --test"
   },
   "devDependencies": {

@@ -12,7 +12,7 @@ npm run build
 npm run preview
 ```
 
-Open the URL printed by the preview command. Static preview mode works without credentials. Netlify Functions require `netlify dev` or a Netlify deploy; plain static preview safely falls back to simulated registration.
+Open `http://localhost:8080`. Static preview mode works without credentials. Netlify Functions require `netlify dev` or a Netlify deploy; plain static preview safely falls back to simulated registration.
 
 ## Checks
 
