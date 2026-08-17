@@ -28,7 +28,7 @@ test("portfolio layers contain clear disclosure", async () => {
   assert.match(caseStudy, /fictional/i);
   assert.match(caseStudy, /not client work/i);
   assert.match(caseStudy, /does not report real-world results/i);
-  assert.match(await readFile("site/email-previews.html", "utf8"), /Portfolio project:/);
+  assert.match(await readFile("site/email-previews.html", "utf8"), /Portfolio example:/);
 });
 
 test("campaign landing has a minimal explicit demo-sequence opt-in", async () => {
@@ -161,7 +161,7 @@ test("Demo 2 uses the approved tested email foundation", async () => {
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
   assert.match(html, /Demo 2 of 3/);
-  assert.match(html, /Your practical content workshop starts tomorrow/);
+  assert.match(html, /Your practical content workshop reminder/);
   assert.match(html, /conference-group-email\.jpg/);
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /ortiz_profie_\.png/);
