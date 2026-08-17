@@ -89,7 +89,7 @@ test("navigation preserves the campaign and portfolio hierarchy", async () => {
   assert.doesNotMatch(caseStudy, /href="\/confirmation\.html"/);
   assert.doesNotMatch(campaign, /href="\/email-previews\.html"/);
   assert.match(campaign, /href="\/case-study\.html">View the Email Clarity project case study/);
-  assert.match(emails, /href="\/case-study\.html">Back to project case study/);
+  assert.match(emails, /href="\/case-study\.html">Back to the case study/);
 });
 
 test("inbox sequence is explicitly labeled and unsubscribable", async () => {
@@ -98,7 +98,7 @@ test("inbox sequence is explicitly labeled and unsubscribable", async () => {
   for (const [page, position] of [["confirmation.html", "1"], ["reminder.html", "2"], ["follow-up.html", "3"]]) {
     const html = await readFile(`site/emails/${page}`, "utf8");
     assert.match(html, new RegExp(`Demo ${position} of 3`, "i"), page);
-    assert.match(html, /fictional/i, page);
+    assert.match(html, /not real/i, page);
     assert.match(html, /\{\{ unsubscribe \}\}/, page);
   }
 });
@@ -106,11 +106,11 @@ test("inbox sequence is explicitly labeled and unsubscribable", async () => {
 test("public email journey excludes the archival invitation and plain-text files", async () => {
   const html = await readFile("site/email-previews.html", "utf8");
   const build = await readFile("scripts/build.mjs", "utf8");
-  assert.match(html, /One consent confirmation and three connected sequence emails/);
+  assert.match(html, /Four emails that take readers from confirmation to follow-up/);
   assert.match(html, /Workshop details and program/);
-  assert.match(html, /About 15 minutes after Demo 1/);
+  assert.match(html, /About 10 minutes after Email 2/);
   assert.match(html, /Content-planning recap/);
-  assert.match(html, /Consent confirmation · Required first/);
+  assert.match(html, /Confirmation email · Sent first/);
   assert.doesNotMatch(html, /Invitation|promotional|Plain-text version|transactional/i);
   assert.doesNotMatch(build, /site\/emails\/promotional|site\/emails\/plain-text/);
 });
