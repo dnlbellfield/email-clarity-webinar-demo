@@ -49,3 +49,15 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Keep the portfolio story comfortable to read without enlarging form or email UI copy. */
+body[data-page="case_study"] main p:not(.eyebrow) {
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  line-height: 1.75;
+}
+
+body[data-page="case_study"] main .lede {
+  font-size: clamp(1.25rem, 1.12rem + 0.55vw, 1.5rem);
+  line-height: 1.65;
+  font-weight: 500;
+}
