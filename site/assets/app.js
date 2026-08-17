@@ -39,17 +39,6 @@ function activeDeliveryMode(value) {
 }
 
 function updateModeCopy() {
-  const note = document.querySelector("[data-sequence-mode-note]");
-  if (note) {
-    if (sequenceConfig.configuredMode !== "inactive" && !sequenceConfig.configurationReady) {
-      note.innerHTML = "<strong>Current status:</strong> Controlled delivery is selected, but the server configuration is incomplete. No request will be sent.";
-    } else if (sequenceConfig.mode === "test") {
-      note.innerHTML = "<strong>Controlled test:</strong> Delivery is available only to explicitly approved test addresses.";
-    } else if (sequenceConfig.mode === "public") {
-      note.innerHTML = "<strong>Public delivery:</strong> Confirm your address to begin the three-email demonstration sequence.";
-    }
-  }
-
   const confirmedStatus = document.querySelector("[data-confirmed-status]");
   if (confirmedStatus) {
     confirmedStatus.innerHTML = sequenceConfig.mode === "test"
