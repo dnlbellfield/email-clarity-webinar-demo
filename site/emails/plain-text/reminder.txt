@@ -1,9 +1,9 @@
-SUBJECT: [Demo 2/3] Reminder: A Practical Content System
-PREHEADER: The second message in your accelerated Commonlight demonstration sequence.
+SUBJECT: [Demo 2/3] Workshop reminder: A Practical Content System
+PREHEADER: The second message in the Commonlight email series.
 
 A PRACTICAL CONTENT SYSTEM FOR SMALL NONPROFIT TEAMS
 
-A quick reminder that the free half-day online workshop begins tomorrow.
+In a live campaign, this reminder would arrive shortly before the workshop. For this portfolio demonstration, it arrives a few minutes after the first message.
 
 Thursday, November 12, 2026
 11:00 a.m.–2:30 p.m. Pacific / 2:00–5:30 p.m. Eastern
