@@ -25,7 +25,7 @@ test("demo sequence fields have explicit labels and no analytics PII interpolati
 test("portfolio layers contain clear disclosure", async () => {
   const caseStudy = await readFile("site/index.html", "utf8");
   assert.match(caseStudy, /Portfolio example:/i);
-  assert.match(caseStudy, /fictional/i);
+  assert.match(caseStudy, /created to simulate a complete online-event campaign/i);
   assert.match(caseStudy, /not client work/i);
   assert.match(caseStudy, /does not report real-world results/i);
   assert.match(await readFile("site/email-previews.html", "utf8"), /Portfolio example:/);
