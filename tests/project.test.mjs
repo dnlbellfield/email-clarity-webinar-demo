@@ -209,7 +209,7 @@ test("Demo 3 uses the approved tested email foundation and inquiry CTA", async (
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
   assert.match(html, /Demo 3 of 3/);
   assert.match(html, /Keep the system practical/);
-  assert.match(html, /email_clarity_cta\.png/);
+  assert.equal(html.match(/https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/discuss-cta\.png/g)?.length, 2);
   assert.match(html, /https:\/\/getemailclarity\.com\/#inquiry/);
   assert.match(html, /ortiz_profie_\.png/);
 });
