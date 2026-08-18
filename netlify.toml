@@ -30,3 +30,13 @@
   from = "/confirmation"
   to = "/confirmation.html"
   status = 200
+
+[[redirects]]
+  from = "/email-previews"
+  to = "/email-previews.html"
+  status = 200
+
+[[redirects]]
+  from = "/emails/followup.html"
+  to = "/emails/follow-up.html"
+  status = 301
