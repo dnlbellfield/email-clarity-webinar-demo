@@ -135,7 +135,10 @@ test("public email journey excludes the archival invitation and plain-text files
 
 test("promotional email uses the production workshop preview image", async () => {
   const html = await readFile("site/emails/promotional.html", "utf8");
+  assert.match(html, /<table[^>]+width="600"[^>]+bgcolor="#1f493b"[^>]+class="callout">/);
+  assert.match(html, /<h2[^>]*>See a better content workflow in action<\/h2>/);
   assert.match(html, /src="https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/zoom\.jpeg"/);
+  assert.match(html, /width="600"[^>]+max-width: 600px; height: auto; margin: 0 auto;/);
   assert.match(html, /alt="Lena Ortiz presenting the content workflow workshop to an online audience"/);
 });
 
