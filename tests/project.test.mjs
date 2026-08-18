@@ -244,6 +244,7 @@ test("Email 3 uses the approved tested email foundation and inquiry CTA", async 
   assert.match(html, /Email 3 of 3/);
   assert.match(html, /Put a Better Content Workflow Into Practice/);
   assert.equal(html.match(/https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/discuss-cta\.png/g)?.length, 2);
+  assert.match(html, /href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/case-study\.html"[^>]*>View the complete case study\.<\/a>/);
   assert.match(html, /https:\/\/getemailclarity\.com\/#inquiry/);
   assert.match(html, /ortiz_profie_\.png/);
 });
