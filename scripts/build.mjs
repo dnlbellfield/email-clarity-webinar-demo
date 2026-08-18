@@ -23,6 +23,7 @@ const entries = [
   "site/assets/images/ortiz_conf.jpeg",
   "site/assets/images/ortiz_profie_.png",
   "site/assets/images/workshop_ct.png",
+  "site/assets/images/zoom.jpeg",
   "site/emails/double-opt-in.html",
   "site/emails/confirmation.html",
   "site/emails/reminder.html",

@@ -133,6 +133,12 @@ test("public email journey excludes the archival invitation and plain-text files
   assert.doesNotMatch(build, /site\/emails\/promotional|site\/emails\/plain-text/);
 });
 
+test("promotional email uses the production workshop preview image", async () => {
+  const html = await readFile("site/emails/promotional.html", "utf8");
+  assert.match(html, /src="https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/zoom\.jpeg"/);
+  assert.match(html, /alt="Lena Ortiz presenting the content workflow workshop to an online audience"/);
+});
+
 test("Demo 1 preserves the tested email-client foundation", async () => {
   const html = await readFile("site/emails/confirmation.html", "utf8");
   for (const marker of [

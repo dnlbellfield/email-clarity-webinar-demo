@@ -1,7 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 
 const expected = new Set([
-  "assets/app.js", "assets/images/conference-group-front-email.jpg", "assets/images/conference-group-front.jpg", "assets/images/conference-group-email.jpg", "assets/images/conference-group.jpg", "assets/images/conference_ortiz.jpg", "assets/images/confirm-cta.png", "assets/images/confirm-demo-sequence.png", "assets/images/discuss-cta.png", "assets/images/email_clarity_cta.png", "assets/images/ortiz_conf.jpeg", "assets/images/ortiz_profie_.png", "assets/images/workshop_ct.png", "assets/site.css", "case-study.html", "confirmation.html",
+  "assets/app.js", "assets/images/conference-group-front-email.jpg", "assets/images/conference-group-front.jpg", "assets/images/conference-group-email.jpg", "assets/images/conference-group.jpg", "assets/images/conference_ortiz.jpg", "assets/images/confirm-cta.png", "assets/images/confirm-demo-sequence.png", "assets/images/discuss-cta.png", "assets/images/email_clarity_cta.png", "assets/images/ortiz_conf.jpeg", "assets/images/ortiz_profie_.png", "assets/images/workshop_ct.png", "assets/images/zoom.jpeg", "assets/site.css", "case-study.html", "confirmation.html",
   "email-previews.html", "emails/confirmation.html", "emails/double-opt-in.html", "emails/follow-up.html",
   "emails/reminder.html", "index.html", "sequence-confirmed.html"
 ]);
