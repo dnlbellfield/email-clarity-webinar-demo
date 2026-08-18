@@ -38,17 +38,6 @@ function activeDeliveryMode(value) {
   return value === "test" || value === "public" ? value : "inactive";
 }
 
-function updateModeCopy() {
-  const confirmedStatus = document.querySelector("[data-confirmed-status]");
-  if (confirmedStatus) {
-    confirmedStatus.innerHTML = sequenceConfig.mode === "test"
-      ? "<strong>Controlled test:</strong> Brevo recorded the confirmation-link click before sending the sequence."
-      : sequenceConfig.mode === "public"
-        ? "<strong>Live sequence:</strong> Brevo recorded the confirmation-link click before sending the sequence."
-        : "<strong>Current local status:</strong> this page is reserved for the approved Brevo confirmation link. Delivery is not active.";
-  }
-}
-
 async function getSequenceConfig() {
   try {
     const response = await fetch(sequenceEndpoint, { headers: { Accept: "application/json" } });
@@ -64,8 +53,6 @@ async function getSequenceConfig() {
   } catch {
     sequenceConfig = { ...sequenceConfig, configurationReady: sequenceConfig.configuredMode === "inactive" };
   }
-  updateModeCopy();
-
   const confirmationMarker = new URLSearchParams(window.location.search).get("confirmation");
   if ((sequenceConfig.mode === "test" || sequenceConfig.mode === "public")
     && page === "sequence_confirmed"
@@ -159,7 +146,7 @@ function initSequenceForm(configurationPromise) {
     const button = form.querySelector('button[type="submit"]');
     const status = document.querySelector("[data-form-status]");
     if (sequenceConfig.configuredMode !== "inactive" && !sequenceConfig.configurationReady) {
-      status.textContent = "The controlled email test is not fully configured yet.";
+      status.textContent = "Email delivery is temporarily unavailable. Please try again later.";
       status.focus();
       return;
     }
@@ -218,12 +205,7 @@ function initInteractiveTracking() {
 }
 
 function initConfirmation() {
-  const element = document.querySelector("[data-confirmation-mode]");
-  if (!element) return;
   const delivery = activeDeliveryMode(sessionStorage.getItem("commonlight_sequence_delivery"));
-  element.textContent = delivery === "test" || delivery === "public"
-    ? "Check your inbox for the Email Clarity confirmation message. The sequence will begin only after you confirm your address."
-    : "This local request was validated only. No details were stored and no email was sent.";
   track("demo_sequence_confirmation_view", { delivery_mode: delivery });
 }
 

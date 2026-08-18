@@ -168,6 +168,12 @@
     /* Media Queries */
     @media screen and (max-width: 600px) {
 
+      .email-container table[width="600"],
+      .email-container table[width="578"] {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
       /* What it does: Forces table cells into full-width rows. */
       .stack-column,
       .stack-column-center {
@@ -289,6 +295,37 @@
         /* IE/Edge */
         -o-background-color: #1f493b !important;
         /* Opera */
+      }
+
+      .callout,
+      .callout td {
+        background-color: #1f493b !important;
+        color: #ffffff !important;
+      }
+
+      .callout h2,
+      .callout p {
+        color: #ffffff !important;
+      }
+
+      .dark-footer,
+      .dark-footer td {
+        background-color: #132d25 !important;
+        color: #ffffff !important;
+      }
+
+      .dark-footer .footer-disclosure {
+        background-color: #1f493b !important;
+        color: #ffffff !important;
+      }
+
+      .signer-block,
+      .signer-block p {
+        color: #ffffff !important;
+      }
+
+      .button {
+        filter: none !important;
       }
 
       .callout h2,
@@ -421,7 +458,7 @@
                     <tr>
                         <td align="center"  style="padding: 0;">
                             <p style="margin: 0; padding: 0px; font-family: 'Arial', helvetica, sans-serif; color: #000000; font-weight: normal; font-size: 19px; line-height: 25px; text-align: left;">
-                            Thanks for exploring <a href="https://email-clarity-webinar-demo.netlify.app/" style="color:#1f493b; font-weight:bold; text-decoration:underline;">A Practical Content System for Small Nonprofit Teams</a>.
+                            Thanks for exploring <a href="https://email-clarity-webinar-demo.netlify.app/" style="color:#1f493b; font-weight:bold; text-decoration:underline;">How Small Nonprofit Teams Can Build a Better Content Workflow</a>.
                             <br />
                             <br />The most useful content system is the one your team can keep using when time and capacity are limited.
                             <br />
@@ -436,7 +473,7 @@
                     <tr>
                         <td style="padding: 30px 0 0px;" align="center">
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="578"
-                                style="width: 100%; max-width: 578px;">
+                                style="width: 100%; max-width: 578px;" class="signer-block">
                                 <tbody>
                                     <tr>
                                         <td align="left" width="87" style="width: 87px;" valign="top" class="portrait">
@@ -491,7 +528,7 @@
         <!-- Workshop callout: BEGIN -->
         <tr>
             <td style="padding: 0 0 50px;" align="center">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="width:100%; max-width:600px; background-color:#fbf7ed; border-left:6px solid #e0ac3e;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="width:100%; max-width:600px; background-color:#fbf7ed; border-left:6px solid #e0ac3e;" class="callout">
                   <tr><td style="padding:28px; font-family:'Arial',helvetica,sans-serif; color:#132d25; text-align:left;"><h2 style="margin:0 0 12px; font-size:25px; line-height:31px;">See how the campaign connects</h2><p style="margin:0; color:#303630; font-size:17px; line-height:27px;">The Email Clarity case study shows how the campaign page, secure sign-up, permission checks, follow-up emails, and testing work together.</p></td></tr>
                 </table>
             </td>
@@ -502,10 +539,10 @@
     <!-- Email Body : END -->
     <!-- Email Footer : BEGIN -->
     <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0"
-    width="100%" style="background-color: #132d25; margin: auto;width: 100%; max-width: 760px;">
+    width="100%" style="background-color: #132d25; margin: auto;width: 100%; max-width: 760px;" class="dark-footer">
     <tr>
     <td align="center"
-    style="background-color: #1f493b; padding: 20px 40px; text-align: center;" class="">
+    style="background-color: #1f493b; padding: 20px 40px; text-align: center;" class="footer-disclosure">
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
     <tbody>
     <tr>

@@ -1,9 +1,9 @@
-SUBJECT: [Demo 1/3] Your workshop details: A Practical Content System
+SUBJECT: [Demo 1/3] Your workshop details: Build a Better Content Workflow
 PREHEADER: Your event details and four-speaker program for November 12.
 
 YOUR PRACTICAL CONTENT WORKSHOP
 
-A Practical Content System for Small Nonprofit Teams is a free half-day online workshop with four connected sessions.
+How Small Nonprofit Teams Can Build a Better Content Workflow is a free half-day online workshop with four connected sessions.
 
 Thursday, November 12, 2026
 11:00 a.m.–2:30 p.m. Pacific / 2:00–5:30 p.m. Eastern

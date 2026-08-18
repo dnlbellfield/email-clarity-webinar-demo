@@ -199,7 +199,7 @@ export async function handleRequest(request, context = {}, dependencies = {}) {
   }
   if (request.method !== "POST") return json({ message: "Method not allowed." }, { status: 405 });
   if (runtime.requestedMode !== "inactive" && !runtime.ready) {
-    return json({ message: "The controlled email test is not fully configured." }, { status: 503 });
+    return json({ message: "Email delivery is temporarily unavailable. Please try again later." }, { status: 503 });
   }
 
   const contentType = request.headers.get("content-type") || "";

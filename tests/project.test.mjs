@@ -53,6 +53,24 @@ test("campaign landing has a minimal explicit demo-sequence opt-in", async () =>
   }
 });
 
+test("opt-in journey pages contain only user-facing next-step language", async () => {
+  const sources = [
+    "site/register.html",
+    "site/confirmation.html",
+    "site/sequence-confirmed.html",
+    "site/assets/app.js"
+  ];
+  const combined = (await Promise.all(sources.map((source) => readFile(source, "utf8")))).join("\n");
+  assert.doesNotMatch(combined, /When public delivery is activated|Live sequence:|Controlled test:|Current local status:|local request was validated|reserved for the approved Brevo confirmation link/i);
+
+  const confirmation = await readFile("site/confirmation.html", "utf8");
+  assert.match(confirmation, /Check your inbox/i);
+  assert.match(confirmation, /Click it to begin the three-email Commonlight sequence/i);
+
+  const sequenceConfirmed = await readFile("site/sequence-confirmed.html", "utf8");
+  assert.match(sequenceConfirmed, /The first Commonlight message should arrive shortly/i);
+});
+
 test("the locked workshop definition is consistent across campaign sources", async () => {
   const sources = [
     "site/register.html",
@@ -68,7 +86,7 @@ test("the locked workshop definition is consistent across campaign sources", asy
     .replaceAll(/https?:\/\/[^\s\"'<>]+/g, "");
   assert.doesNotMatch(combined, /45.minute|single presenter|\bwebinar\b/i);
   for (const phrase of [
-    "A Practical Content System for Small Nonprofit Teams",
+    "How Small Nonprofit Teams Can Build a Better Content Workflow",
     "free half-day online workshop",
     "Thursday, November 12, 2026",
     "11:00 a.m.–2:30 p.m. Pacific",
@@ -132,7 +150,7 @@ test("Demo 1 preserves the tested email-client foundation", async () => {
   assert.match(html, /ortiz_profie_\.png/);
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /<td align="left" width="70%" style="width:70%;[^>]*>Commonlight Studio<\/td>\s*<td align="right" width="30%" style="width:30%;[^>]*>Demo 1 of 3<\/td>/);
-  assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/" style="color:#1f493b; font-weight:bold; text-decoration:underline;">A Practical Content System for Small Nonprofit Teams<\/a>/);
+  assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/" style="color:#1f493b; font-weight:bold; text-decoration:underline;">How Small Nonprofit Teams Can Build a Better Content Workflow<\/a>/);
   assert.match(html, /We&rsquo;d love to see you there\. <a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/"[^>]*>View the workshop page\.<\/a>/);
   assert.match(html, /<td align="center"\s+style="padding: 0;">\s*<p[^>]+text-align: left;/);
   assert.doesNotMatch(html, /WNET|THIRTEEN|AMPscript|%%|image\.email/i);
@@ -142,12 +160,30 @@ test("double opt-in uses the tested foundation and production confirmation link"
   const html = await readFile("site/emails/double-opt-in.html", "utf8");
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
-  assert.match(html, /Confirmation required/);
+  assert.doesNotMatch(html, /Confirmation required/);
+  assert.match(html, />Email Clarity<\/td>\s*<\/tr>/);
   assert.match(html, /confirm-cta\.png/);
   assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/sequence-confirmed\.html\?confirmation=brevo/);
   assert.equal(html.match(/href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/sequence-confirmed\.html\?confirmation=brevo"/g)?.length, 3);
   assert.doesNotMatch(html, /conference-group/);
   assert.doesNotMatch(html, /localhost|double_opt_in_url/);
+});
+
+test("Commonlight emails define readable dark-mode surfaces", async () => {
+  for (const page of ["double-opt-in.html", "confirmation.html", "reminder.html", "follow-up.html", "promotional.html"]) {
+    const html = await readFile(`site/emails/${page}`, "utf8");
+    assert.match(html, /@media \(prefers-color-scheme: dark\)/, page);
+    assert.match(html, /class="callout"/, page);
+    assert.match(html, /\.callout td \{[\s\S]*?background-color: #1f493b !important;[\s\S]*?color: #ffffff !important;/, page);
+    assert.match(html, /class="dark-footer"/, page);
+    assert.match(html, /\.dark-footer td \{[\s\S]*?background-color: #132d25 !important;[\s\S]*?color: #ffffff !important;/, page);
+    assert.match(html, /\.button \{\s*filter: none !important;/, page);
+    assert.match(html, /table\[width="600"\],[\s\S]*?table\[width="578"\][\s\S]*?width: 100% !important;/, page);
+  }
+
+  for (const page of ["confirmation.html", "reminder.html", "follow-up.html"]) {
+    assert.match(await readFile(`site/emails/${page}`, "utf8"), /class="signer-block"/, page);
+  }
 });
 
 test("email previews permit inline email CSS without relaxing the main site", async () => {

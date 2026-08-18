@@ -168,6 +168,12 @@
     /* Media Queries */
     @media screen and (max-width: 600px) {
 
+      .email-container table[width="600"],
+      .email-container table[width="578"] {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
       /* What it does: Forces table cells into full-width rows. */
       .stack-column,
       .stack-column-center {
@@ -291,6 +297,37 @@
         /* Opera */
       }
 
+      .callout,
+      .callout td {
+        background-color: #1f493b !important;
+        color: #ffffff !important;
+      }
+
+      .callout h2,
+      .callout p {
+        color: #ffffff !important;
+      }
+
+      .dark-footer,
+      .dark-footer td {
+        background-color: #132d25 !important;
+        color: #ffffff !important;
+      }
+
+      .dark-footer .footer-disclosure {
+        background-color: #1f493b !important;
+        color: #ffffff !important;
+      }
+
+      .signer-block,
+      .signer-block p {
+        color: #ffffff !important;
+      }
+
+      .button {
+        filter: none !important;
+      }
+
       .callout h2,
       .callout h2 a,
        h3 a  {
@@ -359,8 +396,7 @@
             <td align="center" style="padding: 22px; text-align:center; background-color: #1f493b;" class="header">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                   <tr>
-                    <td align="left" width="70%" style="width:70%; font-family: 'Arial', helvetica, sans-serif; color:#ffffff; font-size:21px; line-height:26px; font-weight:bold;">Email Clarity</td>
-                    <td align="right" width="30%" style="width:30%; font-family: 'Arial', helvetica, sans-serif; color:#f1cd72; font-size:12px; line-height:18px; font-weight:bold; letter-spacing:1.5px; text-transform:uppercase;">Confirmation required</td>
+                    <td align="left" width="100%" style="width:100%; font-family: 'Arial', helvetica, sans-serif; color:#ffffff; font-size:21px; line-height:26px; font-weight:bold;">Email Clarity</td>
                   </tr>
                 </table>
             </td>
@@ -413,7 +449,7 @@
         <!-- Confirmation callout: BEGIN -->
         <tr>
             <td style="padding:30px 0 50px;" align="center">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="width:100%; max-width:600px; background-color:#fbf7ed; border-left:6px solid #e0ac3e;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="width:100%; max-width:600px; background-color:#fbf7ed; border-left:6px solid #e0ac3e;" class="callout">
                     <tr>
                         <td style="padding:28px; font-family:'Arial',helvetica,sans-serif; color:#132d25; text-align:left;">
                             <h2 style="margin:0 0 12px; font-size:25px; line-height:31px;">What happens next</h2>
@@ -428,9 +464,9 @@
     </table>
     <!-- Email Body : END -->
     <!-- Email Footer : BEGIN -->
-    <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#132d25; margin:auto; width:100%; max-width:760px;">
+    <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#132d25; margin:auto; width:100%; max-width:760px;" class="dark-footer">
         <tr>
-            <td align="center" style="background-color:#1f493b; padding:20px 40px; text-align:center;">
+            <td align="center" style="background-color:#1f493b; padding:20px 40px; text-align:center;" class="footer-disclosure">
                 <p class="disclaimer" style="margin:0; font-family:'Arial',helvetica,sans-serif; font-size:13px; line-height:1.4; color:#ffffff; text-align:center; font-style:italic;">Portfolio example: Commonlight Studio, its speakers, and the event are not real. Email Clarity created them to show how a complete campaign can work.</p>
             </td>
         </tr>

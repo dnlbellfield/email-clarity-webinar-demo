@@ -17,7 +17,7 @@ Public opt-in form
 → sequence ends
 ```
 
-The campaign presents **A Practical Content System for Small Nonprofit Teams** as a free half-day online workshop on Thursday, November 12, 2026, from 11:00 a.m. to 2:30 p.m. Pacific. Its four connected sessions are led by fictional speakers Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel. The form requests the real three-email demonstration sequence; it does not register the visitor for an actual event.
+The campaign presents **How Small Nonprofit Teams Can Build a Better Content Workflow** as a free half-day online workshop on Thursday, November 12, 2026, from 11:00 a.m. to 2:30 p.m. Pacific. Its four connected sessions are led by fictional speakers Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel. The form requests the real three-email demonstration sequence; it does not register the visitor for an actual event.
 
 The repository implements the request form, consent language, `inactive`, `test`, and `public` server modes, pending and confirmed pages, email previews, Turnstile integration, provider-aware duplicate protection, and safe event vocabulary. Brevo account resources still have to be created before controlled delivery can begin.
 
@@ -65,8 +65,8 @@ The visitor does not enter these values; the server and automation set them. Do 
 Create one Email Clarity double-opt-in template and three Commonlight sequence templates using the HTML artifacts in `site/emails/`:
 
 1. `Confirm your Commonlight demo sequence` — sender Email Clarity; link the CTA to the absolute production `/sequence-confirmed.html?confirmation=brevo` URL.
-2. `[Demo 1/3] Your workshop details: A Practical Content System`
-3. `[Demo 2/3] Reminder: A Practical Content System`
+2. `[Demo 1/3] Your workshop details: Build a Better Content Workflow`
+3. `[Demo 2/3] Reminder: Build a Better Content Workflow`
 4. `[Demo 3/3] Your Commonlight content-planning recap`
 
 The double-opt-in email is not one of the three sequence messages. Replace all relative image and CTA URLs with absolute production URLs. Replace the final project's local case-study link with the approved Email Clarity inquiry URL.
