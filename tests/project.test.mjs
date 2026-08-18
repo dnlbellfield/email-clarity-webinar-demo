@@ -244,9 +244,9 @@ test("Email 3 uses the approved tested email foundation and inquiry CTA", async 
   assert.match(html, /Email 3 of 3/);
   assert.match(html, /Put a Better Content Workflow Into Practice/);
   assert.equal(html.match(/https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/discuss-cta\.png/g)?.length, 1);
-  assert.match(html, /href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/case-study\.html"[^>]*>[\s\S]*?src="https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/case-study-cta\.png"/);
-  assert.ok(html.indexOf("case-study-cta.png") < html.indexOf("Thanks for exploring"));
-  assert.ok(html.indexOf("case-study-cta.png") < html.indexOf("discuss-cta.png"));
+  assert.match(html, /href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/case-study\.html"[^>]*>[\s\S]*?src="https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/case-study-cta\.jpeg"/);
+  assert.ok(html.indexOf("case-study-cta.jpeg") < html.indexOf("Thanks for exploring"));
+  assert.ok(html.indexOf("case-study-cta.jpeg") < html.indexOf("discuss-cta.png"));
   assert.match(html, /https:\/\/getemailclarity\.com\/#inquiry/);
   assert.match(html, /ortiz_profie_\.png/);
 });
