@@ -13,5 +13,5 @@ Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel will lead four connected ses
 
 View workshop details: ../index.html
 
-Demo 2 of 3. This reminder was sent on an accelerated schedule as part of an Email Clarity demonstration. Commonlight Studio and the workshop are fictional.
+Demo 2 of 3. This reminder was sent on an accelerated schedule as part of the Commonlight sequence.
 Unsubscribe: {{ unsubscribe }}

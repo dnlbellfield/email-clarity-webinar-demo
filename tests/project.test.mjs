@@ -115,10 +115,25 @@ test("inbox sequence is explicitly labeled and unsubscribable", async () => {
   assert.match(doubleOptIn, /Confirm your Commonlight demo sequence/i);
   for (const [page, position] of [["confirmation.html", "1"], ["reminder.html", "2"], ["follow-up.html", "3"]]) {
     const html = await readFile(`site/emails/${page}`, "utf8");
-    assert.match(html, new RegExp(`Demo ${position} of 3`, "i"), page);
-    assert.match(html, /not real/i, page);
+    assert.match(html, new RegExp(`(?:Demo|Email) ${position} of 3`, "i"), page);
     assert.match(html, /\{\{ unsubscribe \}\}/, page);
   }
+});
+
+test("emails omit portfolio and fictional-project disclosure copy", async () => {
+  const emailFiles = [
+    "site/emails/double-opt-in.html",
+    "site/emails/confirmation.html",
+    "site/emails/reminder.html",
+    "site/emails/follow-up.html",
+    "site/emails/promotional.html",
+    "site/emails/plain-text/confirmation.txt",
+    "site/emails/plain-text/reminder.txt",
+    "site/emails/plain-text/follow-up.txt",
+    "site/emails/plain-text/promotional.txt"
+  ];
+  const combined = (await Promise.all(emailFiles.map((file) => readFile(file, "utf8")))).join("\n");
+  assert.doesNotMatch(combined, /Portfolio example|not real|\bfictional\b|show how a complete campaign can work/i);
 });
 
 test("sequence emails use their numbered production banner above the hero image", async () => {
@@ -152,7 +167,7 @@ test("promotional email uses the production workshop preview image", async () =>
   assert.match(html, /alt="Lena Ortiz presenting the content workflow workshop to an online audience"/);
 });
 
-test("Demo 1 preserves the tested email-client foundation", async () => {
+test("Email 1 preserves the tested email-client foundation", async () => {
   const html = await readFile("site/emails/confirmation.html", "utf8");
   for (const marker of [
     "xmlns:v=\"urn:schemas-microsoft-com:vml\"",
@@ -168,8 +183,8 @@ test("Demo 1 preserves the tested email-client foundation", async () => {
   assert.match(html, /conference-group-front-email\.jpg/);
   assert.match(html, /ortiz_profie_\.png/);
   assert.match(html, /workshop_ct\.png/);
-  assert.match(html, /<td align="left" width="70%" style="width:70%;[^>]*>Commonlight Studio<\/td>\s*<td align="right" width="30%" style="width:30%;[^>]*>Demo 1 of 3<\/td>/);
-  assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/" style="color:#1f493b; font-weight:bold; text-decoration:underline;">How Small Nonprofit Teams Can Build a Better Content Workflow<\/a>/);
+  assert.match(html, /<td align="left" width="70%" style="width:70%;[^>]*>Commonlight Studio<\/td>\s*<td align="right" width="30%" style="width:30%;[^>]*>Email 1 of 3<\/td>/);
+  assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/[^"]*" style="color:#1f493b; font-weight:bold; text-decoration:underline;">How Small Nonprofit Teams Can Build a Better Content Workflow<\/a>/);
   assert.match(html, /We&rsquo;d love to see you there\. <a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/"[^>]*>View the workshop page\.<\/a>/);
   assert.match(html, /<td align="center"\s+style="padding: 0;">\s*<p[^>]+text-align: left;/);
   assert.doesNotMatch(html, /WNET|THIRTEEN|AMPscript|%%|image\.email/i);
@@ -211,23 +226,23 @@ test("email previews permit inline email CSS without relaxing the main site", as
   assert.match(config, /for = "\/\*"[\s\S]*?style-src 'self';/);
 });
 
-test("Demo 2 uses the approved tested email foundation", async () => {
+test("Email 2 uses the approved tested email foundation", async () => {
   const html = await readFile("site/emails/reminder.html", "utf8");
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
-  assert.match(html, /Demo 2 of 3/);
+  assert.match(html, /Email 2 of 3/);
   assert.match(html, /Your practical content workshop reminder/);
   assert.match(html, /conference-group-email\.jpg/);
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /ortiz_profie_\.png/);
 });
 
-test("Demo 3 uses the approved tested email foundation and inquiry CTA", async () => {
+test("Email 3 uses the approved tested email foundation and inquiry CTA", async () => {
   const html = await readFile("site/emails/follow-up.html", "utf8");
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
-  assert.match(html, /Demo 3 of 3/);
-  assert.match(html, /Keep the system practical/);
+  assert.match(html, /Email 3 of 3/);
+  assert.match(html, /Put a Better Content Workflow Into Practice/);
   assert.equal(html.match(/https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/discuss-cta\.png/g)?.length, 2);
   assert.match(html, /https:\/\/getemailclarity\.com\/#inquiry/);
   assert.match(html, /ortiz_profie_\.png/);

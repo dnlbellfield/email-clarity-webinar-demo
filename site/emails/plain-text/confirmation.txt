@@ -11,5 +11,5 @@ Free · Live online
 
 Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel cover content planning, reuse, fundraising communications, and approvals.
 
-Demo 1 of 3. You requested this fictional Commonlight sequence from Email Clarity. It does not add you to unrelated marketing.
+Demo 1 of 3. You requested this Commonlight sequence from Email Clarity. It does not add you to unrelated marketing.
 Unsubscribe: {{ unsubscribe }}

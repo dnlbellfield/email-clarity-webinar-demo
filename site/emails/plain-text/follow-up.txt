@@ -10,5 +10,5 @@ Choose recurring themes that support real priorities. Reuse strong stories witho
 Need help implementing a campaign like this?
 Discuss your project with Email Clarity: https://getemailclarity.com/#inquiry
 
-Demo 3 of 3. This is the final message in the sequence; no newsletter or unrelated marketing follows. Commonlight Studio and the event are fictional.
+Demo 3 of 3. This is the final message in the sequence; no newsletter or unrelated marketing follows.
 Unsubscribe: {{ unsubscribe }}
