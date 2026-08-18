@@ -121,6 +121,16 @@ test("inbox sequence is explicitly labeled and unsubscribable", async () => {
   }
 });
 
+test("sequence emails use their numbered production banner above the hero image", async () => {
+  for (const [page, position] of [["confirmation.html", "01"], ["reminder.html", "02"], ["follow-up.html", "03"]]) {
+    const html = await readFile(`site/emails/${page}`, "utf8");
+    const banner = `https://email-clarity-webinar-demo.netlify.app/assets/images/email_banner_${position}.jpeg`;
+    assert.match(html, new RegExp(banner.replaceAll(".", "\\.")), page);
+    assert.ok(html.indexOf(banner) < html.indexOf("conference-group"), page);
+    assert.match(html, new RegExp(`src="${banner.replaceAll(".", "\\.")}"[^>]+width="680"[^>]+width: 100%; max-width: 680px; height: auto; margin: 0 auto;`), page);
+  }
+});
+
 test("public email journey excludes the archival invitation and plain-text files", async () => {
   const html = await readFile("site/email-previews.html", "utf8");
   const build = await readFile("scripts/build.mjs", "utf8");
