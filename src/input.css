@@ -41,8 +41,35 @@
   .demo-note { @apply border-y border-gold-500/35 bg-gold-300/25 py-3 text-sm text-forest-950; }
   .field { @apply mt-2 w-full rounded-xl border border-charcoal-700/40 bg-white px-4 py-3 text-charcoal-900 shadow-sm; }
   .field-error { @apply mt-2 text-sm font-semibold text-red-800; }
-  .email-frame { @apply mx-auto block min-h-[760px] w-full max-w-[700px] rounded-2xl border border-forest-950/15 bg-white shadow-soft; }
+  .email-frame { @apply mx-auto block w-full border-0 bg-white; }
+  .email-preview-grid { @apply grid gap-x-8 gap-y-16 lg:grid-cols-2; }
+  .email-preview-card { @apply flex scroll-mt-6 flex-col overflow-hidden rounded-3xl border border-forest-950/10 bg-white shadow-[0_12px_32px_rgb(19_45_37_/_0.07)]; }
+  .email-preview-thumbnail { @apply relative h-64 overflow-hidden border-b border-forest-950/10 bg-white; }
+  .email-preview-thumbnail::after { content: ""; @apply pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-white to-transparent; }
+  .email-preview-thumbnail .email-frame { @apply pointer-events-none min-h-[760px]; transform: scale(.7143); transform-origin: top center; width: 140%; margin-left: -20%; }
+  .email-preview-details { @apply flex flex-1 flex-col p-6 sm:p-8; }
+  .email-preview-details h2 { @apply mt-2 text-2xl font-bold text-forest-950; }
+  .email-preview-details dl { @apply mt-5 space-y-4; }
+  .email-preview-details dl div { @apply border-t border-forest-950/10 pt-3; }
+  .email-preview-details dt { @apply text-xs font-bold uppercase tracking-[.14em] text-forest-700; }
+  .email-preview-details dd { @apply mt-1 leading-6 text-charcoal-700; }
+  .email-preview-details .button { @apply mt-6 self-start; }
+  .email-preview-closing { @apply mt-20 border-t border-forest-950/15 pt-10; }
+  .email-dialog { @apply m-auto h-[min(92dvh,1000px)] w-[min(760px,calc(100%-2rem))] max-w-none overflow-hidden border-0 bg-transparent p-0; }
+  .email-dialog::backdrop { background: rgb(19 45 37 / .78); }
+  .email-dialog-panel { @apply flex h-full flex-col overflow-hidden rounded-2xl bg-cream-50 shadow-2xl; }
+  .email-dialog-header { @apply z-10 flex shrink-0 items-start justify-between gap-4 border-b border-forest-950/10 bg-cream-50 px-5 py-4 sm:px-6; }
+  .email-dialog-header h2 { @apply mt-1 text-xl font-bold text-forest-950; }
+  .email-dialog-close { @apply flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-forest-950/20 bg-white text-3xl leading-none text-forest-950 hover:bg-cream-100; }
+  .email-dialog-scroll { @apply flex-1 overflow-y-auto overscroll-contain bg-white py-4; }
+  .email-dialog-scroll .email-frame { @apply max-w-[700px]; }
   .flow-step { @apply relative rounded-2xl border border-forest-950/10 bg-white p-5; }
+}
+
+@media (max-width: 639px) {
+  .email-dialog { width: calc(100% - .75rem); height: calc(100dvh - .75rem); }
+  .email-dialog-panel { border-radius: 1rem; }
+  .email-dialog-scroll { padding-block: .5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

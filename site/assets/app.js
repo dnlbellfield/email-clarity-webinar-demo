@@ -204,6 +204,122 @@ function initInteractiveTracking() {
   }));
 }
 
+function initEmailPreviewDialog() {
+  const dialog = document.querySelector("[data-email-dialog]");
+  if (!dialog) return;
+
+  const dialogTitle = dialog.querySelector("[data-email-dialog-title]");
+  const dialogContent = dialog.querySelector("[data-email-dialog-content]");
+  const closeButton = dialog.querySelector("[data-email-dialog-close]");
+  let activeFrame = null;
+  let thumbnail = null;
+  let trigger = null;
+  let previousBodyOverflow = "";
+  const framesWithKeyboardHandling = new WeakSet();
+
+  function handleFrameKeydown(event) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeDialog();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = [...event.currentTarget.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if ((event.shiftKey && (!first || event.target === first)) || (!event.shiftKey && (!last || event.target === last))) {
+      event.preventDefault();
+      closeButton.focus();
+    }
+  }
+
+  function sizeFrame() {
+    if (!activeFrame) return;
+    try {
+      const emailDocument = activeFrame.contentDocument;
+      emailDocument.documentElement.style.overflow = "hidden";
+      emailDocument.body.style.overflow = "hidden";
+      const height = Math.max(emailDocument.documentElement.scrollHeight, emailDocument.body.scrollHeight, 760) + 2;
+      activeFrame.style.height = `${height}px`;
+      if (!framesWithKeyboardHandling.has(activeFrame)) {
+        emailDocument.addEventListener("keydown", handleFrameKeydown);
+        framesWithKeyboardHandling.add(activeFrame);
+      }
+    } catch {
+      activeFrame.style.height = "1200px";
+    }
+  }
+
+  function scheduleFrameSize() {
+    requestAnimationFrame(() => requestAnimationFrame(sizeFrame));
+  }
+
+  function closeDialog() {
+    if (dialog.open) dialog.close();
+  }
+
+  function restorePreview() {
+    if (!activeFrame || !thumbnail) return;
+    activeFrame.removeEventListener("load", scheduleFrameSize);
+    activeFrame.style.height = "";
+    activeFrame.tabIndex = -1;
+    thumbnail.append(activeFrame);
+    document.body.style.overflow = previousBodyOverflow;
+    activeFrame = null;
+    thumbnail = null;
+    trigger?.focus();
+    trigger = null;
+  }
+
+  document.querySelectorAll("[data-email-dialog-open]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest("[data-email-preview]");
+      activeFrame = card?.querySelector(".email-frame");
+      thumbnail = activeFrame?.parentElement;
+      if (!card || !activeFrame || !thumbnail) return;
+
+      trigger = button;
+      dialogTitle.textContent = card.querySelector("h2")?.textContent || "Email";
+      activeFrame.tabIndex = 0;
+      activeFrame.addEventListener("load", scheduleFrameSize);
+      dialogContent.append(activeFrame);
+      previousBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      dialog.showModal();
+      scheduleFrameSize();
+      closeButton.focus();
+    });
+  });
+
+  closeButton.addEventListener("click", closeDialog);
+  dialog.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeDialog();
+  });
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) closeDialog();
+  });
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeDialog();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = [...dialog.querySelectorAll('button:not([disabled]), iframe[tabindex="0"]')];
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+  dialog.addEventListener("close", restorePreview);
+}
+
 function initConfirmation() {
   const delivery = activeDeliveryMode(sessionStorage.getItem("commonlight_sequence_delivery"));
   track("demo_sequence_confirmation_view", { delivery_mode: delivery });
@@ -213,6 +329,7 @@ window.dataLayer = window.dataLayer || [];
 const configurationPromise = getSequenceConfig();
 initSequenceForm(configurationPromise);
 initInteractiveTracking();
+initEmailPreviewDialog();
 initConfirmation();
 configurationPromise.then(initTurnstile).catch(() => {
   const status = document.querySelector("[data-form-status]");

@@ -158,6 +158,27 @@ test("public email journey excludes the archival invitation and plain-text files
   assert.doesNotMatch(build, /site\/emails\/promotional|site\/emails\/plain-text/);
 });
 
+test("email preview cards expose subjects and an accessible reusable preview dialog", async () => {
+  const html = await readFile("site/email-previews.html", "utf8");
+  const js = await readFile("site/assets/app.js", "utf8");
+  for (const subject of [
+    "Your workshop details: A Practical Content System",
+    "Workshop reminder: A Practical Content System",
+    "Your Commonlight content-planning recap"
+  ]) assert.match(html, new RegExp(subject));
+  assert.equal(html.match(/data-email-dialog-open/g)?.length, 4);
+  assert.equal(html.match(/class="email-frame"/g)?.length, 4);
+  assert.match(html, /<dialog[^>]+aria-labelledby="email-dialog-title"/);
+  assert.match(js, /dialog\.showModal\(\)/);
+  assert.match(js, /event\.key === "Escape"/);
+  assert.match(js, /event\.key !== "Tab"/);
+  assert.match(js, /event\.target === dialog/);
+  assert.match(js, /trigger\?\.focus\(\)/);
+  assert.match(js, /document\.body\.style\.overflow = "hidden"/);
+  assert.match(js, /emailDocument\.documentElement\.style\.overflow = "hidden"/);
+  assert.match(js, /requestAnimationFrame\(\(\) => requestAnimationFrame\(sizeFrame\)\)/);
+});
+
 test("promotional email uses the production workshop preview image", async () => {
   const html = await readFile("site/emails/promotional.html", "utf8");
   assert.match(html, /<table[^>]+width="600"[^>]+bgcolor="#1f493b"[^>]+class="callout">/);
