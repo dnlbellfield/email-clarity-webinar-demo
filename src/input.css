@@ -47,7 +47,7 @@
   .field-error { @apply mt-2 text-sm font-semibold text-red-800; }
   .email-preview-grid { @apply grid gap-x-8 gap-y-16 lg:grid-cols-2; }
   .email-preview-card { @apply flex scroll-mt-6 flex-col overflow-hidden rounded-3xl border border-forest-950/10 bg-white shadow-[0_12px_32px_rgb(19_45_37_/_0.07)]; }
-  .email-preview-thumbnail { @apply relative h-64 overflow-hidden border-b border-forest-950/10 bg-white; }
+  .email-preview-thumbnail { @apply relative h-80 overflow-hidden border-b border-forest-950/10 bg-white; }
   .email-preview-thumbnail img { @apply block h-auto w-full; }
   .email-preview-details { @apply flex flex-1 flex-col bg-[#e8eee9] p-6 sm:p-8; }
   .email-preview-details h2 { @apply mt-2 text-2xl font-bold text-forest-950; }
@@ -386,7 +386,7 @@ body[data-page="case_study"] main > section.bg-cream-100 { background: #e8eee7; 
 
 body[data-page="email_previews"] .email-preview-card {
   border: 1.5px solid #132d25;
-  border-radius: .5rem .5rem var(--play-radius) var(--play-radius);
+  border-radius: 10px;
   background: #faf7ef;
   box-shadow: 6px 6px 0 var(--play-sage);
 }
