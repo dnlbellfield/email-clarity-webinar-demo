@@ -210,59 +210,21 @@ function initEmailPreviewDialog() {
 
   const dialogTitle = dialog.querySelector("[data-email-dialog-title]");
   const closeButton = dialog.querySelector("[data-email-dialog-close]");
-  const activeFrame = dialog.querySelector(".email-frame");
+  const activeImage = dialog.querySelector(".email-preview-full");
   let trigger = null;
   let previousBodyOverflow = "";
-  const documentsWithKeyboardHandling = new WeakSet();
-
-  function handleFrameKeydown(event) {
-    if (event.key === "Escape") {
-      event.preventDefault();
-      closeDialog();
-      return;
-    }
-    if (event.key !== "Tab") return;
-    const focusable = [...event.currentTarget.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')];
-    const first = focusable[0];
-    const last = focusable.at(-1);
-    if ((event.shiftKey && (!first || event.target === first)) || (!event.shiftKey && (!last || event.target === last))) {
-      event.preventDefault();
-      closeButton.focus();
-    }
-  }
-
-  function sizeFrame() {
-    try {
-      const emailDocument = activeFrame.contentDocument;
-      emailDocument.documentElement.style.overflow = "hidden";
-      emailDocument.body.style.overflow = "hidden";
-      const height = Math.max(emailDocument.documentElement.scrollHeight, emailDocument.body.scrollHeight, 760) + 2;
-      activeFrame.style.height = `${height}px`;
-      if (!documentsWithKeyboardHandling.has(emailDocument)) {
-        emailDocument.addEventListener("keydown", handleFrameKeydown);
-        documentsWithKeyboardHandling.add(emailDocument);
-      }
-    } catch {
-      activeFrame.style.height = "1200px";
-    }
-  }
-
-  function scheduleFrameSize() {
-    requestAnimationFrame(() => requestAnimationFrame(sizeFrame));
-  }
 
   function closeDialog() {
     if (dialog.open) dialog.close();
   }
 
   function restorePreview() {
-    activeFrame.style.height = "";
+    activeImage.removeAttribute("src");
+    activeImage.alt = "";
     document.body.style.overflow = previousBodyOverflow;
     trigger?.focus();
     trigger = null;
   }
-
-  activeFrame.addEventListener("load", scheduleFrameSize);
 
   document.querySelectorAll("[data-email-dialog-open]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -271,13 +233,11 @@ function initEmailPreviewDialog() {
 
       trigger = button;
       dialogTitle.textContent = card.querySelector("h2")?.textContent || "Email";
-      activeFrame.title = card.dataset.emailFrameTitle || "Email preview";
-      activeFrame.style.height = "760px";
+      activeImage.alt = card.dataset.emailImageAlt || "Full visual email preview";
+      activeImage.src = card.dataset.emailImageSrc;
       previousBodyOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       dialog.showModal();
-      if (activeFrame.getAttribute("src") === card.dataset.emailSrc) scheduleFrameSize();
-      else activeFrame.src = card.dataset.emailSrc;
       closeButton.focus();
     });
   });
@@ -297,16 +257,8 @@ function initEmailPreviewDialog() {
       return;
     }
     if (event.key !== "Tab") return;
-    const focusable = [...dialog.querySelectorAll('button:not([disabled]), iframe[tabindex="0"]')];
-    const first = focusable[0];
-    const last = focusable.at(-1);
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+    event.preventDefault();
+    closeButton.focus();
   });
   dialog.addEventListener("close", restorePreview);
 }

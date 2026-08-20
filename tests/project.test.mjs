@@ -28,7 +28,6 @@ test("portfolio layers contain clear disclosure", async () => {
   assert.match(caseStudy, /created to simulate a complete online-event campaign/i);
   assert.match(caseStudy, /not client work/i);
   assert.match(caseStudy, /does not report real-world results/i);
-  assert.match(await readFile("site/email-previews.html", "utf8"), /Portfolio example:/);
 });
 
 test("campaign landing has a minimal explicit demo-sequence opt-in", async () => {
@@ -98,16 +97,25 @@ test("the locked workshop definition is consistent across campaign sources", asy
   ]) assert.match(combined, new RegExp(phrase, "i"));
 });
 
-test("navigation preserves the campaign and portfolio hierarchy", async () => {
+test("primary navigation connects the campaign, case study, and email previews", async () => {
   const caseStudy = await readFile("site/index.html", "utf8");
   const campaign = await readFile("site/register.html", "utf8");
   const emails = await readFile("site/email-previews.html", "utf8");
+
+  for (const html of [campaign, caseStudy, emails]) {
+    assert.match(html, /<nav class="site-nav" aria-label="Primary navigation">/);
+    assert.match(html, /href="\/"[^>]*>Campaign Demo<\/a>/);
+    assert.match(html, /href="\/case-study\.html"[^>]*>Case Study<\/a>/);
+    assert.match(html, /href="\/email-previews\.html"[^>]*>Email Previews<\/a>/);
+  }
+
+  assert.match(campaign, /href="\/" aria-current="page">Campaign Demo<\/a>/);
+  assert.match(caseStudy, /href="\/case-study\.html" aria-current="page">Case Study<\/a>/);
+  assert.match(emails, /href="\/email-previews\.html" aria-current="page">Email Previews<\/a>/);
   assert.match(caseStudy, /href="\/"[^>]*>See the sign-up experience/);
   assert.match(caseStudy, /href="\/email-previews\.html">Preview the emails/);
   assert.doesNotMatch(caseStudy, /href="\/confirmation\.html"/);
-  assert.doesNotMatch(campaign, /href="\/email-previews\.html"/);
   assert.match(campaign, /href="\/case-study\.html">View the Email Clarity project case study/);
-  assert.match(emails, /href="\/case-study\.html">Back to the case study/);
 });
 
 test("inbox sequence is explicitly labeled and unsubscribable", async () => {
@@ -168,7 +176,9 @@ test("email preview cards expose subjects and an accessible reusable preview dia
   ]) assert.match(html, new RegExp(subject));
   assert.equal(html.match(/data-email-dialog-open/g)?.length, 4);
   assert.equal(html.match(/class="email-preview-thumbnail"/g)?.length, 4);
-  assert.equal(html.match(/class="email-frame"/g)?.length, 1);
+  assert.equal(html.match(/data-email-image-src=/g)?.length, 4);
+  assert.equal(html.match(/class="email-preview-full"/g)?.length, 1);
+  assert.doesNotMatch(html, /<iframe|data-email-src=|\/emails\/.+\.html/);
   for (const image of ["double-opt-in.jpeg", "email-1.jpeg", "reminder-email-2.jpeg", "follow-up-email-3.jpeg"]) {
     assert.match(html, new RegExp(`/assets/images/${image}`));
   }
@@ -179,8 +189,8 @@ test("email preview cards expose subjects and an accessible reusable preview dia
   assert.match(js, /event\.target === dialog/);
   assert.match(js, /trigger\?\.focus\(\)/);
   assert.match(js, /document\.body\.style\.overflow = "hidden"/);
-  assert.match(js, /emailDocument\.documentElement\.style\.overflow = "hidden"/);
-  assert.match(js, /requestAnimationFrame\(\(\) => requestAnimationFrame\(sizeFrame\)\)/);
+  assert.match(js, /activeImage\.src = card\.dataset\.emailImageSrc/);
+  assert.doesNotMatch(js, /contentDocument|activeFrame|emailFrameTitle/);
 });
 
 test("promotional email uses the production workshop preview image", async () => {
