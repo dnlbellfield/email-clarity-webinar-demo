@@ -46,7 +46,7 @@
   .email-preview-card { @apply flex scroll-mt-6 flex-col overflow-hidden rounded-3xl border border-forest-950/10 bg-white shadow-[0_12px_32px_rgb(19_45_37_/_0.07)]; }
   .email-preview-thumbnail { @apply relative h-64 overflow-hidden border-b border-forest-950/10 bg-white; }
   .email-preview-thumbnail::after { content: ""; @apply pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-white to-transparent; }
-  .email-preview-thumbnail .email-frame { @apply pointer-events-none min-h-[760px]; transform: scale(.7143); transform-origin: top center; width: 140%; margin-left: -20%; }
+  .email-preview-thumbnail img { @apply block h-auto w-full; }
   .email-preview-details { @apply flex flex-1 flex-col p-6 sm:p-8; }
   .email-preview-details h2 { @apply mt-2 text-2xl font-bold text-forest-950; }
   .email-preview-details dl { @apply mt-5 space-y-4; }

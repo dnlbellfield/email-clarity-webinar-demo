@@ -209,13 +209,11 @@ function initEmailPreviewDialog() {
   if (!dialog) return;
 
   const dialogTitle = dialog.querySelector("[data-email-dialog-title]");
-  const dialogContent = dialog.querySelector("[data-email-dialog-content]");
   const closeButton = dialog.querySelector("[data-email-dialog-close]");
-  let activeFrame = null;
-  let thumbnail = null;
+  const activeFrame = dialog.querySelector(".email-frame");
   let trigger = null;
   let previousBodyOverflow = "";
-  const framesWithKeyboardHandling = new WeakSet();
+  const documentsWithKeyboardHandling = new WeakSet();
 
   function handleFrameKeydown(event) {
     if (event.key === "Escape") {
@@ -234,16 +232,15 @@ function initEmailPreviewDialog() {
   }
 
   function sizeFrame() {
-    if (!activeFrame) return;
     try {
       const emailDocument = activeFrame.contentDocument;
       emailDocument.documentElement.style.overflow = "hidden";
       emailDocument.body.style.overflow = "hidden";
       const height = Math.max(emailDocument.documentElement.scrollHeight, emailDocument.body.scrollHeight, 760) + 2;
       activeFrame.style.height = `${height}px`;
-      if (!framesWithKeyboardHandling.has(activeFrame)) {
+      if (!documentsWithKeyboardHandling.has(emailDocument)) {
         emailDocument.addEventListener("keydown", handleFrameKeydown);
-        framesWithKeyboardHandling.add(activeFrame);
+        documentsWithKeyboardHandling.add(emailDocument);
       }
     } catch {
       activeFrame.style.height = "1200px";
@@ -259,34 +256,28 @@ function initEmailPreviewDialog() {
   }
 
   function restorePreview() {
-    if (!activeFrame || !thumbnail) return;
-    activeFrame.removeEventListener("load", scheduleFrameSize);
     activeFrame.style.height = "";
-    activeFrame.tabIndex = -1;
-    thumbnail.append(activeFrame);
     document.body.style.overflow = previousBodyOverflow;
-    activeFrame = null;
-    thumbnail = null;
     trigger?.focus();
     trigger = null;
   }
 
+  activeFrame.addEventListener("load", scheduleFrameSize);
+
   document.querySelectorAll("[data-email-dialog-open]").forEach((button) => {
     button.addEventListener("click", () => {
       const card = button.closest("[data-email-preview]");
-      activeFrame = card?.querySelector(".email-frame");
-      thumbnail = activeFrame?.parentElement;
-      if (!card || !activeFrame || !thumbnail) return;
+      if (!card) return;
 
       trigger = button;
       dialogTitle.textContent = card.querySelector("h2")?.textContent || "Email";
-      activeFrame.tabIndex = 0;
-      activeFrame.addEventListener("load", scheduleFrameSize);
-      dialogContent.append(activeFrame);
+      activeFrame.title = card.dataset.emailFrameTitle || "Email preview";
+      activeFrame.style.height = "760px";
       previousBodyOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       dialog.showModal();
-      scheduleFrameSize();
+      if (activeFrame.getAttribute("src") === card.dataset.emailSrc) scheduleFrameSize();
+      else activeFrame.src = card.dataset.emailSrc;
       closeButton.focus();
     });
   });

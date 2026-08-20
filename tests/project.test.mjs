@@ -167,7 +167,11 @@ test("email preview cards expose subjects and an accessible reusable preview dia
     "Your Commonlight content-planning recap"
   ]) assert.match(html, new RegExp(subject));
   assert.equal(html.match(/data-email-dialog-open/g)?.length, 4);
-  assert.equal(html.match(/class="email-frame"/g)?.length, 4);
+  assert.equal(html.match(/class="email-preview-thumbnail"/g)?.length, 4);
+  assert.equal(html.match(/class="email-frame"/g)?.length, 1);
+  for (const image of ["double-opt-in.jpeg", "email-1.jpeg", "reminder-email-2.jpeg", "follow-up-email-3.jpeg"]) {
+    assert.match(html, new RegExp(`/assets/images/${image}`));
+  }
   assert.match(html, /<dialog[^>]+aria-labelledby="email-dialog-title"/);
   assert.match(js, /dialog\.showModal\(\)/);
   assert.match(js, /event\.key === "Escape"/);
