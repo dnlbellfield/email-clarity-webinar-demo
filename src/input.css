@@ -57,21 +57,20 @@
   .email-preview-details dd { @apply mt-1 leading-6 text-charcoal-700; }
   .email-preview-details .button { @apply mt-6 self-start; }
   .email-preview-closing { @apply mt-20 border-t border-forest-950/15 pt-10; }
-  .email-dialog { @apply m-auto h-[min(92dvh,1000px)] w-[min(760px,calc(100%-2rem))] max-w-none overflow-hidden border-0 bg-transparent p-0; }
+  .email-dialog { @apply m-auto h-[min(92dvh,1000px)] w-[min(600px,calc(100%-2rem))] max-w-none overflow-hidden border-0 bg-transparent p-0; }
   .email-dialog::backdrop { background: rgb(19 45 37 / .78); }
   .email-dialog-panel { @apply flex h-full flex-col overflow-hidden rounded-2xl bg-cream-50 shadow-2xl; }
   .email-dialog-header { @apply z-10 flex shrink-0 items-start justify-between gap-4 border-b border-forest-950/10 bg-cream-50 px-5 py-4 sm:px-6; }
   .email-dialog-header h2 { @apply mt-1 text-xl font-bold text-forest-950; }
   .email-dialog-close { @apply flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-forest-950/20 bg-white text-3xl leading-none text-forest-950 hover:bg-cream-100; }
-  .email-dialog-scroll { @apply flex-1 overflow-y-auto overscroll-contain bg-white py-4; }
-  .email-preview-full { @apply mx-auto block h-auto w-full max-w-[700px] bg-white; }
+  .email-dialog-scroll { @apply flex-1 overflow-y-auto overscroll-contain bg-white; }
+  .email-preview-full { @apply mx-auto block h-auto w-full max-w-[600px] bg-white; }
   .flow-step { @apply relative rounded-2xl border border-forest-950/10 bg-white p-5; }
 }
 
 @media (max-width: 639px) {
   .email-dialog { width: calc(100% - .75rem); height: calc(100dvh - .75rem); }
   .email-dialog-panel { border-radius: 1rem; }
-  .email-dialog-scroll { padding-block: .5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -350,6 +349,8 @@ body[data-page="email_previews"] .site-header .nav-link[aria-current="page"] {
   background: var(--play-gold);
   color: #132d25;
 }
+
+body[data-page="sequence_confirmed"] main { padding-top: 0; }
 
 body[data-page="case_study"] .display,
 body[data-page="email_previews"] .display,
