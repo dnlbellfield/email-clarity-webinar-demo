@@ -22,9 +22,9 @@ test("demo sequence fields have explicit labels and no analytics PII interpolati
   assert.doesNotMatch(js, /demo_registration_/);
 });
 
-test("portfolio layers contain clear disclosure", async () => {
+test("case study contains clear disclosure", async () => {
   const caseStudy = await readFile("site/index.html", "utf8");
-  assert.match(caseStudy, /Portfolio example:/i);
+  assert.match(caseStudy, /Case study note:/i);
   assert.match(caseStudy, /created to simulate a complete online-event campaign/i);
   assert.match(caseStudy, /not client work/i);
   assert.match(caseStudy, /does not report real-world results/i);
@@ -114,6 +114,8 @@ test("primary navigation connects the campaign, case study, and email previews",
   assert.match(emails, /href="\/email-previews\.html" aria-current="page">Email Previews<\/a>/);
   assert.match(caseStudy, /href="\/"[^>]*>See the sign-up experience/);
   assert.match(caseStudy, /href="\/email-previews\.html">Preview the emails/);
+  assert.match(caseStudy, />Commonlight Studio case study</);
+  assert.doesNotMatch(caseStudy, /portfolio project|portfolio example/i);
   assert.doesNotMatch(caseStudy, /href="\/confirmation\.html"/);
   assert.match(campaign, /href="\/case-study\.html">View the Email Clarity project case study/);
 });
@@ -174,8 +176,9 @@ test("email preview cards expose subjects and an accessible reusable preview dia
     "Workshop reminder: A Practical Content System",
     "Your Commonlight content-planning recap"
   ]) assert.match(html, new RegExp(subject));
-  assert.equal(html.match(/data-email-dialog-open/g)?.length, 4);
-  assert.equal(html.match(/class="email-preview-thumbnail"/g)?.length, 4);
+  assert.equal(html.match(/data-email-dialog-open/g)?.length, 8);
+  assert.equal(html.match(/<button class="email-preview-thumbnail"/g)?.length, 4);
+  assert.equal(html.match(/class="email-preview-thumbnail"[^>]+aria-label="View full/g)?.length, 4);
   assert.equal(html.match(/data-email-image-src=/g)?.length, 4);
   assert.equal(html.match(/class="email-preview-full"/g)?.length, 1);
   assert.doesNotMatch(html, /<iframe|data-email-src=|\/emails\/.+\.html/);

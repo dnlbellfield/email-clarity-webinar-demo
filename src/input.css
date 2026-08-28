@@ -47,8 +47,9 @@
   .field-error { @apply mt-2 text-sm font-semibold text-red-800; }
   .email-preview-grid { @apply grid gap-x-8 gap-y-16 lg:grid-cols-2; }
   .email-preview-card { @apply flex scroll-mt-6 flex-col overflow-hidden rounded-3xl border border-forest-950/10 bg-white shadow-[0_12px_32px_rgb(19_45_37_/_0.07)]; }
-  .email-preview-thumbnail { @apply relative h-80 overflow-hidden border-b border-forest-950/10 bg-white; }
-  .email-preview-thumbnail img { @apply block h-auto w-full; }
+  .email-preview-thumbnail { @apply relative block h-80 w-full cursor-zoom-in overflow-hidden border-0 border-b border-forest-950/10 bg-white p-0 text-left; }
+  .email-preview-thumbnail img { @apply block h-auto w-full transition duration-300; }
+  .email-preview-thumbnail:hover img { transform: scale(1.015); }
   .email-preview-details { @apply flex flex-1 flex-col bg-[#e8eee9] p-6 sm:p-8; }
   .email-preview-details h2 { @apply mt-2 text-2xl font-bold text-forest-950; }
   .email-preview-details dl { @apply mt-5 space-y-4; }
@@ -412,9 +413,57 @@ body[data-page="email_previews"] > footer p { color: #fffdf8; }
 }
 
 @media (max-width: 639px) {
-  .site-header-inner { align-items: flex-start; flex-direction: column; gap: .35rem; padding-block: .85rem; }
-  .site-nav { justify-content: flex-start; margin-inline: -.5rem; }
-  .nav-link { padding: .45rem .5rem; font-size: .8125rem; }
+  .site-header-inner {
+    align-items: stretch;
+    flex-direction: column;
+    gap: .75rem;
+    min-height: 0;
+    padding-block: .85rem .75rem;
+  }
+  .site-brand {
+    align-self: flex-start;
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+  .site-nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: .25rem;
+    padding: .25rem;
+    border: 1px solid rgb(19 45 37 / .12);
+    border-radius: 1rem;
+    background: rgb(19 45 37 / .06);
+  }
+  .nav-link {
+    display: flex;
+    min-width: 0;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: .45rem .2rem;
+    font-size: clamp(.68rem, 3.1vw, .8125rem);
+    line-height: 1.15;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .nav-link[aria-current="page"] {
+    background: #f1cd72;
+    color: #132d25;
+    box-shadow: 0 2px 10px rgb(19 45 37 / .14);
+  }
+  body[data-page="case_study"] .site-nav,
+  body[data-page="email_previews"] .site-nav,
+  body[data-page="registration"] .site-nav {
+    border-color: rgb(255 255 255 / .14);
+    background: rgb(255 255 255 / .07);
+  }
+  body[data-page="case_study"] .site-header .nav-link[aria-current="page"],
+  body[data-page="email_previews"] .site-header .nav-link[aria-current="page"],
+  body[data-page="registration"] .registration-header .nav-link[aria-current="page"] {
+    background: #f1cd72;
+    color: #132d25;
+  }
   .registration-hero-copy {
     border-radius: 1.5rem 3.5rem 1.5rem 1.5rem;
     box-shadow: 0 18px 42px rgb(5 24 19 / .2);
