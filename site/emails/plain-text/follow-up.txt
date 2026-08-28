@@ -1,4 +1,4 @@
-SUBJECT: [Demo 3/3] One thing to bring to A Practical Content System
+SUBJECT: One thing to bring to A Practical Content System
 PREHEADER: Choose one real content challenge to work on during the workshop.
 
 ONE THING TO BRING TO THE WORKSHOP
@@ -22,10 +22,12 @@ Write it down in a sentence and keep it nearby during the workshop. A specific e
 
 View the workshop details: https://email-clarity-webinar-demo.netlify.app/
 
+Let's get ready to brainstorm. Bring one real content challenge, and we'll use the workshop ideas to shape a practical next step for your team.
+
 See you at the workshop,
 
 Lena Ortiz
 Content Strategy Lead, Commonlight Studio
 
-Demo 3 of 3. This is the final message in the sequence; no newsletter or unrelated marketing follows.
+This is the final message in the sequence; no newsletter or unrelated marketing follows.
 Unsubscribe: {{ unsubscribe }}

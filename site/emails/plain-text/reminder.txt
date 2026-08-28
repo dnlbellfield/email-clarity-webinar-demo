@@ -1,4 +1,4 @@
-SUBJECT: [Demo 2/3] Workshop reminder: Build a Better Content Workflow
+SUBJECT: Workshop reminder: Build a Better Content Workflow
 PREHEADER: The second message in the Commonlight email series.
 
 HOW SMALL NONPROFIT TEAMS CAN BUILD A BETTER CONTENT WORKFLOW
@@ -13,5 +13,5 @@ Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel will lead four connected ses
 
 View workshop details: ../index.html
 
-Demo 2 of 3. This reminder was sent on an accelerated schedule as part of the Commonlight sequence.
+This reminder was sent on an accelerated schedule as part of the Commonlight sequence.
 Unsubscribe: {{ unsubscribe }}

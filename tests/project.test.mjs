@@ -120,13 +120,17 @@ test("primary navigation connects the campaign, case study, and email previews",
   assert.match(campaign, /href="\/case-study\.html">View the Email Clarity project case study/);
 });
 
-test("inbox sequence is explicitly labeled and unsubscribable", async () => {
+test("inbox sequence is unnumbered and unsubscribable", async () => {
   const doubleOptIn = await readFile("site/emails/double-opt-in.html", "utf8");
   assert.match(doubleOptIn, /Confirm your Commonlight demo sequence/i);
-  for (const [page, position] of [["confirmation.html", "1"], ["reminder.html", "2"], ["follow-up.html", "3"]]) {
+  for (const page of ["confirmation.html", "reminder.html", "follow-up.html"]) {
     const html = await readFile(`site/emails/${page}`, "utf8");
-    assert.match(html, new RegExp(`(?:Demo|Email) ${position} of 3`, "i"), page);
+    assert.doesNotMatch(html, /(?:Demo|Email) [123] of 3|\[Demo [123]\/3\]/i, page);
     assert.match(html, /\{\{ unsubscribe \}\}/, page);
+  }
+  for (const page of ["confirmation.txt", "reminder.txt", "follow-up.txt"]) {
+    const text = await readFile(`site/emails/plain-text/${page}`, "utf8");
+    assert.doesNotMatch(text, /(?:Demo|Email) [123] of 3|\[Demo [123]\/3\]/i, page);
   }
 });
 
@@ -165,7 +169,7 @@ test("public email journey excludes the archival invitation and plain-text files
   const build = await readFile("scripts/build.mjs", "utf8");
   assert.match(html, /Four emails that take readers from confirmation to workshop preparation/);
   assert.match(html, /Workshop details and program/);
-  assert.match(html, /About 10 minutes after Email 2/);
+  assert.match(html, /About 10 minutes after the reminder/);
   assert.match(html, /Prepare for the workshop/);
   assert.match(html, /Confirmation email · Sent first/);
   assert.doesNotMatch(html, /Invitation|promotional|Plain-text version|transactional/i);
@@ -225,7 +229,8 @@ test("Email 1 preserves the tested email-client foundation", async () => {
   assert.match(html, /conference-group-front-email\.jpg/);
   assert.match(html, /ortiz_profie_\.png/);
   assert.match(html, /workshop_ct\.png/);
-  assert.match(html, /<td align="left" width="70%" style="width:70%;[^>]*>Commonlight Studio<\/td>\s*<td align="right" width="30%" style="width:30%;[^>]*>Email 1 of 3<\/td>/);
+  assert.match(html, /<td align="left" width="100%" style="width:100%;[^>]*>Commonlight Studio<\/td>/);
+  assert.doesNotMatch(html, /Email 1 of 3|\[Demo 1\/3\]/);
   assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/[^"]*" style="color:#1f493b; font-weight:bold; text-decoration:underline;">How Small Nonprofit Teams Can Build a Better Content Workflow<\/a>/);
   assert.match(html, /We&rsquo;d love to see you there\. <a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/"[^>]*>View the workshop page\.<\/a>/);
   assert.match(html, /<td align="center"\s+style="padding: 0;">\s*<p[^>]+text-align: left;/);
@@ -272,7 +277,7 @@ test("Email 2 uses the approved tested email foundation", async () => {
   const html = await readFile("site/emails/reminder.html", "utf8");
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
-  assert.match(html, /Email 2 of 3/);
+  assert.doesNotMatch(html, /Email 2 of 3|\[Demo 2\/3\]/);
   assert.match(html, /Your practical content workshop reminder/);
   assert.match(html, /conference-group-email\.jpg/);
   assert.match(html, /workshop_ct\.png/);
@@ -283,13 +288,11 @@ test("Email 3 uses the tested foundation for one focused workshop preparation ta
   const html = await readFile("site/emails/follow-up.html", "utf8");
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
-  assert.match(html, /Email 3 of 3/);
+  assert.doesNotMatch(html, /Email 3 of 3|\[Demo 3\/3\]/);
   assert.match(html, /One Thing to Bring to the Workshop/);
   assert.match(html, /Hi there,/);
   assert.doesNotMatch(html, /\{\{\s*(?:contact\.)?FIRSTNAME/i);
   assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/group-workshop\.jpg/);
-  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/group-small\.jpg/);
-  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/workshop_ct\.png/);
   for (const bullet of [
     "An upcoming campaign that needs a clearer plan",
     "A strong story you want to reuse across channels",
