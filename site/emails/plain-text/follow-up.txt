@@ -1,14 +1,31 @@
-SUBJECT: [Demo 3/3] Your Commonlight content-planning recap
-PREHEADER: The final message in your Commonlight demonstration sequence.
+SUBJECT: [Demo 3/3] One thing to bring to A Practical Content System
+PREHEADER: Choose one real content challenge to work on during the workshop.
 
-KEEP THE SYSTEM PRACTICAL
+ONE THING TO BRING TO THE WORKSHOP
 
-Thanks for exploring How Small Nonprofit Teams Can Build a Better Content Workflow.
+Hi there,
 
-Choose recurring themes that support real priorities. Reuse strong stories without making every channel identical. Connect everyday content with fundraising moments. Give reviews clear owners and manageable deadlines.
+Before the workshop, choose one content challenge your team is currently facing.
 
-Need help implementing a campaign like this?
-Discuss your project with Email Clarity: https://getemailclarity.com/#inquiry
+It could be:
+
+- An upcoming campaign that needs a clearer plan
+- A strong story you want to reuse across channels
+- A fundraising message that isn't connecting
+- An approval process that keeps slowing the team down
+
+You don't need to prepare a presentation or solve the problem in advance. Just bring one real example. As you move through the sessions, you'll be able to connect what you're learning to work already on your plate.
+
+BRING ONE REAL CHALLENGE
+
+Write it down in a sentence and keep it nearby during the workshop. A specific example will make the ideas easier to apply—and give you a practical next step to take back to your team.
+
+View the workshop details: https://email-clarity-webinar-demo.netlify.app/
+
+See you at the workshop,
+
+Lena Ortiz
+Content Strategy Lead, Commonlight Studio
 
 Demo 3 of 3. This is the final message in the sequence; no newsletter or unrelated marketing follows.
 Unsubscribe: {{ unsubscribe }}

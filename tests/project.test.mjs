@@ -147,11 +147,15 @@ test("emails omit portfolio and fictional-project disclosure copy", async () => 
 });
 
 test("sequence emails use their numbered production banner above the hero image", async () => {
-  for (const [page, position] of [["confirmation.html", "01"], ["reminder.html", "02"], ["follow-up.html", "03"]]) {
+  for (const [page, position, heroImage] of [
+    ["confirmation.html", "01", "conference-group"],
+    ["reminder.html", "02", "conference-group"],
+    ["follow-up.html", "03", "group-workshop"]
+  ]) {
     const html = await readFile(`site/emails/${page}`, "utf8");
     const banner = `https://email-clarity-webinar-demo.netlify.app/assets/images/email_banner_${position}.jpeg`;
     assert.match(html, new RegExp(banner.replaceAll(".", "\\.")), page);
-    assert.ok(html.indexOf(banner) < html.indexOf("conference-group"), page);
+    assert.ok(html.indexOf(banner) < html.indexOf(heroImage), page);
     assert.match(html, new RegExp(`src="${banner.replaceAll(".", "\\.")}"[^>]+width="680"[^>]+width: 100%; max-width: 680px; height: auto; margin: 0 auto;`), page);
   }
 });
@@ -159,10 +163,10 @@ test("sequence emails use their numbered production banner above the hero image"
 test("public email journey excludes the archival invitation and plain-text files", async () => {
   const html = await readFile("site/email-previews.html", "utf8");
   const build = await readFile("scripts/build.mjs", "utf8");
-  assert.match(html, /Four emails that take readers from confirmation to follow-up/);
+  assert.match(html, /Four emails that take readers from confirmation to workshop preparation/);
   assert.match(html, /Workshop details and program/);
   assert.match(html, /About 10 minutes after Email 2/);
-  assert.match(html, /Content-planning recap/);
+  assert.match(html, /Prepare for the workshop/);
   assert.match(html, /Confirmation email · Sent first/);
   assert.doesNotMatch(html, /Invitation|promotional|Plain-text version|transactional/i);
   assert.doesNotMatch(build, /site\/emails\/promotional|site\/emails\/plain-text/);
@@ -174,7 +178,7 @@ test("email preview cards expose subjects and an accessible reusable preview dia
   for (const subject of [
     "Your workshop details: A Practical Content System",
     "Workshop reminder: A Practical Content System",
-    "Your Commonlight content-planning recap"
+    "One thing to bring to A Practical Content System"
   ]) assert.match(html, new RegExp(subject));
   assert.equal(html.match(/data-email-dialog-open/g)?.length, 8);
   assert.equal(html.match(/<button class="email-preview-thumbnail"/g)?.length, 4);
@@ -275,16 +279,23 @@ test("Email 2 uses the approved tested email foundation", async () => {
   assert.match(html, /ortiz_profie_\.png/);
 });
 
-test("Email 3 uses the approved tested email foundation and inquiry CTA", async () => {
+test("Email 3 uses the tested foundation for one focused workshop preparation task", async () => {
   const html = await readFile("site/emails/follow-up.html", "utf8");
   assert.match(html, /<o:OfficeDocumentSettings>/);
   assert.match(html, /Preview Text Spacing Hack : BEGIN/);
   assert.match(html, /Email 3 of 3/);
-  assert.match(html, /Put a Better Content Workflow Into Practice/);
-  assert.equal(html.match(/https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/discuss-cta\.png/g)?.length, 1);
-  assert.match(html, /href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/case-study\.html"[^>]*>[\s\S]*?src="https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/case-study-cta\.jpeg"/);
-  assert.ok(html.indexOf("case-study-cta.jpeg") < html.indexOf("Thanks for exploring"));
-  assert.ok(html.indexOf("case-study-cta.jpeg") < html.indexOf("discuss-cta.png"));
-  assert.match(html, /https:\/\/getemailclarity\.com\/#inquiry/);
+  assert.match(html, /One Thing to Bring to the Workshop/);
+  assert.match(html, /Hi there,/);
+  assert.doesNotMatch(html, /\{\{\s*(?:contact\.)?FIRSTNAME/i);
+  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/group-workshop\.jpg/);
+  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/group-small\.jpg/);
+  assert.match(html, /https:\/\/email-clarity-webinar-demo\.netlify\.app\/assets\/images\/workshop_ct\.png/);
+  for (const bullet of [
+    "An upcoming campaign that needs a clearer plan",
+    "A strong story you want to reuse across channels",
+    "A fundraising message that isn&rsquo;t connecting",
+    "An approval process that keeps slowing the team down"
+  ]) assert.match(html, new RegExp(`<tr>[\\s\\S]*?<td[^>]*>${bullet.replaceAll("'", "\\'")}</td>[\\s\\S]*?</tr>`));
+  assert.doesNotMatch(html, /discuss-cta\.png|case-study-cta\.jpeg|getemailclarity\.com\/#inquiry/);
   assert.match(html, /ortiz_profie_\.png/);
 });
