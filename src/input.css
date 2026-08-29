@@ -48,7 +48,12 @@
   .email-preview-grid { @apply grid gap-x-8 gap-y-16 lg:grid-cols-2; }
   .email-preview-card { @apply flex scroll-mt-6 flex-col overflow-hidden rounded-3xl border border-forest-950/10 bg-white shadow-[0_12px_32px_rgb(19_45_37_/_0.07)]; }
   .email-preview-thumbnail { @apply relative block h-80 w-full cursor-zoom-in overflow-hidden border-0 border-b border-forest-950/10 bg-white p-0 text-left; }
-  .email-preview-thumbnail img { @apply block h-auto w-full transition duration-300; }
+  .email-preview-thumbnail img {
+    @apply block h-auto transition duration-300;
+    width: calc(100% + 12px);
+    max-width: none;
+    margin: -5px -6px -7px;
+  }
   .email-preview-thumbnail:hover img { transform: scale(1.015); }
   .email-preview-details { @apply flex flex-1 flex-col bg-[#e8eee9] p-6 sm:p-8; }
   .email-preview-details h2 { @apply mt-2 text-2xl font-bold text-forest-950; }
@@ -64,8 +69,13 @@
   .email-dialog-header { @apply z-10 flex shrink-0 items-start justify-between gap-4 border-b border-forest-950/10 bg-cream-50 px-5 py-4 sm:px-6; }
   .email-dialog-header h2 { @apply mt-1 text-xl font-bold text-forest-950; }
   .email-dialog-close { @apply flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-forest-950/20 bg-white text-3xl leading-none text-forest-950 hover:bg-cream-100; }
-  .email-dialog-scroll { @apply flex-1 overflow-y-auto overscroll-contain bg-white; }
-  .email-preview-full { @apply mx-auto block h-auto w-full max-w-[600px] bg-white; }
+  .email-dialog-scroll { @apply flex-1 overflow-y-auto overscroll-contain bg-white; overflow-x: hidden; }
+  .email-preview-full {
+    @apply block h-auto bg-white;
+    width: calc(100% + 12px);
+    max-width: none;
+    margin: -5px -6px -7px;
+  }
   .flow-step { @apply relative rounded-2xl border border-forest-950/10 bg-white p-5; }
 }
 
@@ -297,7 +307,6 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
 
 .registration-figure figcaption {
   background: linear-gradient(90deg, rgb(19 45 37 / .76), rgb(19 45 37 / .58));
-  backdrop-filter: blur(2px);
 }
 
 .registration-figure figcaption > div > p:last-child {

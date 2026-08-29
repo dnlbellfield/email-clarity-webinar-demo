@@ -47,7 +47,7 @@ test("campaign landing has a minimal explicit demo-sequence opt-in", async () =>
   for (const speaker of ["Lena Ortiz", "Maya Chen", "Theo Brooks", "Amina Patel"]) {
     assert.match(html, new RegExp(speaker));
   }
-  for (const image of ["conference-group-front.jpg", "ortiz_conf.jpeg", "conference-group.jpg"]) {
+  for (const image of ["conference-group-front.jpg", "ortiz_conf.jpeg", "group-bg-.jpg"]) {
     assert.match(html, new RegExp(image));
   }
 });
