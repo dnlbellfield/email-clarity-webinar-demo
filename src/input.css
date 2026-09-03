@@ -15,8 +15,15 @@
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { @apply m-0 bg-cream-50 font-sans text-charcoal-900 antialiased; }
+  html {
+    scroll-behavior: smooth;
+    overscroll-behavior-y: none;
+    background-color: var(--color-forest-950);
+  }
+  body {
+    @apply m-0 bg-cream-50 font-sans text-charcoal-900 antialiased;
+    overscroll-behavior-y: none;
+  }
   a { @apply underline decoration-forest-700/35 underline-offset-4; }
   a:hover { @apply decoration-forest-700; }
   :focus-visible { @apply outline-3 outline-offset-3 outline-gold-500; }
