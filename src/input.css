@@ -216,12 +216,8 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
   border-bottom: 1px solid rgb(19 45 37 / .14);
 }
 
-.registration-form-intro .eyebrow {
-  color: #2b604d;
-}
-
 .registration-form h2 {
-  margin-top: .65rem;
+  margin-top: 0;
   font-size: clamp(1.75rem, 2.2vw, 2.15rem);
   line-height: 1.1;
   letter-spacing: -.025em;
