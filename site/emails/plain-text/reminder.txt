@@ -1,7 +1,7 @@
 SUBJECT: Workshop reminder: Build a Better Content Workflow
 PREHEADER: The second message in the Commonlight email series.
 
-HOW SMALL NONPROFIT TEAMS CAN BUILD A BETTER CONTENT WORKFLOW
+HOW SMALL TEAMS CAN BUILD A BETTER CONTENT WORKFLOW
 
 In a live campaign, this reminder would arrive shortly before the workshop. For this portfolio demonstration, it arrives a few minutes after the first message.
 

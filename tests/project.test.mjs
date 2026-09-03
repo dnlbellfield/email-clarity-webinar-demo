@@ -43,7 +43,7 @@ test("campaign landing has a minimal explicit demo-sequence opt-in", async () =>
   assert.match(html, /unsubscribe at any time/i);
   assert.match(html, /not be added to a general marketing list/i);
   assert.match(html, /shell grid gap-12[^\"]*lg:grid-cols-\[1fr_\.82fr\]/);
-  assert.match(html, /11 a\.m\.–2:30 p\.m\. PT/);
+  assert.match(html, /Begins 11am PST/);
   for (const speaker of ["Lena Ortiz", "Maya Chen", "Theo Brooks", "Amina Patel"]) {
     assert.match(html, new RegExp(speaker));
   }
@@ -85,7 +85,7 @@ test("the locked workshop definition is consistent across campaign sources", asy
     .replaceAll(/https?:\/\/[^\s\"'<>]+/g, "");
   assert.doesNotMatch(combined, /45.minute|single presenter|\bwebinar\b/i);
   for (const phrase of [
-    "How Small Nonprofit Teams Can Build a Better Content Workflow",
+    "How Small Teams Can Build a Better Content Workflow",
     "free half-day online workshop",
     "Thursday, November 12, 2026",
     "11:00 a.m.–2:30 p.m. Pacific",
@@ -231,7 +231,7 @@ test("Email 1 preserves the tested email-client foundation", async () => {
   assert.match(html, /workshop_ct\.png/);
   assert.match(html, /<td align="left" width="100%" style="width:100%;[^>]*>Commonlight Studio<\/td>/);
   assert.doesNotMatch(html, /Email 1 of 3|\[Demo 1\/3\]/);
-  assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/[^"]*" style="color:#1f493b; font-weight:bold; text-decoration:underline;">How Small Nonprofit Teams Can Build a Better Content Workflow<\/a>/);
+  assert.match(html, /<a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/[^"]*" style="color:#1f493b; font-weight:bold; text-decoration:underline;">How Small Teams Can Build a Better Content Workflow<\/a>/);
   assert.match(html, /We&rsquo;d love to see you there\. <a href="https:\/\/email-clarity-webinar-demo\.netlify\.app\/"[^>]*>View the workshop page\.<\/a>/);
   assert.match(html, /<td align="center"\s+style="padding: 0;">\s*<p[^>]+text-align: left;/);
   assert.doesNotMatch(html, /WNET|THIRTEEN|AMPscript|%%|image\.email/i);

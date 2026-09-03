@@ -17,7 +17,7 @@ Public opt-in form
 → sequence ends
 ```
 
-The campaign presents **How Small Nonprofit Teams Can Build a Better Content Workflow** as a free half-day online workshop on Thursday, November 12, 2026, from 11:00 a.m. to 2:30 p.m. Pacific. Its four connected sessions are led by fictional speakers Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel. The form requests the real three-email demonstration sequence; it does not register the visitor for an actual event.
+The campaign presents **How Small Teams Can Build a Better Content Workflow** as a free half-day online workshop on Thursday, November 12, 2026, from 11:00 a.m. to 2:30 p.m. Pacific. Its four connected sessions are led by fictional speakers Lena Ortiz, Maya Chen, Theo Brooks, and Amina Patel. The form requests the real three-email demonstration sequence; it does not register the visitor for an actual event.
 
 The repository implements the request form, consent language, `inactive`, `test`, and `public` server modes, pending and confirmed pages, email previews, Turnstile integration, provider-aware duplicate protection, and safe event vocabulary. Brevo account resources still have to be created before controlled delivery can begin.
 

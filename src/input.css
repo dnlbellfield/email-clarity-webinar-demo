@@ -181,10 +181,10 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
 
 .registration-title,
 .registration-hero-copy .registration-title {
-  max-width: 13ch;
+  max-width: none;
   color: #fffdf8;
   font-family: "Arial Rounded MT Bold", "Avenir Next Rounded", "Avenir Next", sans-serif;
-  font-size: clamp(2.45rem, 3.8vw, 3.8rem);
+  font-size: clamp(2.25rem, 3.5vw, 3.5rem);
   line-height: 1.02;
   letter-spacing: -.04em;
   text-wrap: pretty;
@@ -211,7 +211,32 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
   box-shadow: 0 22px 55px rgb(5 24 19 / .18);
 }
 
-.registration-form h2 { font-size: 1.625rem; }
+.registration-form-intro {
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid rgb(19 45 37 / .14);
+}
+
+.registration-form-intro .eyebrow {
+  color: #2b604d;
+}
+
+.registration-form h2 {
+  margin-top: .65rem;
+  font-size: clamp(1.75rem, 2.2vw, 2.15rem);
+  line-height: 1.1;
+  letter-spacing: -.025em;
+}
+
+.registration-form-intro > p:last-child {
+  max-width: 34rem;
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.registration-form form {
+  margin-top: 2rem;
+}
 
 .registration-content {
   position: relative;
@@ -416,6 +441,12 @@ body[data-page="case_study"] > footer p,
 body[data-page="email_previews"] > footer a,
 body[data-page="email_previews"] > footer p { color: #fffdf8; }
 
+@media (min-width: 1024px) {
+  .registration-hero-copy {
+    padding-block: clamp(4.5rem, 6vw, 5.5rem);
+  }
+}
+
 @media (max-width: 1023px) {
   .registration-hero-copy,
   .registration-form { max-width: 45rem; }
@@ -479,6 +510,6 @@ body[data-page="email_previews"] > footer p { color: #fffdf8; }
   }
   .registration-hero-copy::after { right: 1rem; }
   .registration-title,
-  .registration-hero-copy .registration-title { font-size: clamp(2.25rem, 10.5vw, 2.9rem); }
+  .registration-hero-copy .registration-title { font-size: clamp(1.9rem, 8vw, 2.35rem); }
   .registration-agenda { box-shadow: 4px 4px 0 var(--play-gold); }
 }

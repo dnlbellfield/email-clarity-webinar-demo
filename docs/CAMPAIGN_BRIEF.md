@@ -2,7 +2,7 @@
 
 ## Locked event definition
 
-- Event: **How Small Nonprofit Teams Can Build a Better Content Workflow**
+- Event: **How Small Teams Can Build a Better Content Workflow**
 - Format: **Free half-day online workshop**
 - Date: **Thursday, November 12, 2026**
 - Time: **11:00 a.m.–2:30 p.m. Pacific**
