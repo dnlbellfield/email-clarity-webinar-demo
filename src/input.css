@@ -274,6 +274,12 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
   box-shadow: 6px 6px 0 var(--play-sage);
 }
 
+@media (min-width: 768px) {
+  .registration-featured-speaker-copy {
+    padding-top: calc(1.75rem + 100px);
+  }
+}
+
 .registration-featured-speaker-time {
   font-size: clamp(.875rem, .4375rem + 1.37vw, 1.3125rem);
   line-height: 1.4;
