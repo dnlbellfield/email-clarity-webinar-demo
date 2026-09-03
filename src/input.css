@@ -274,7 +274,25 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
   box-shadow: 6px 6px 0 var(--play-sage);
 }
 
-.registration-speaker-list { counter-reset: playful-speakers 1; }
+.registration-featured-speaker-time {
+  font-size: clamp(.875rem, .4375rem + 1.37vw, 1.3125rem);
+  line-height: 1.4;
+}
+
+.registration-featured-speaker-name {
+  font-size: clamp(1.5rem, .75rem + 2.34vw, 2.25rem);
+  line-height: 1.15;
+}
+
+.registration-featured-speaker-role {
+  font-size: clamp(1rem, .875rem + .39vw, 1.125rem);
+  line-height: 1.4;
+}
+
+.registration-featured-speaker-description {
+  font-size: clamp(1rem, .875rem + .39vw, 1.125rem);
+  line-height: 1.5;
+}
 
 .registration-speaker-card {
   position: relative;
@@ -282,19 +300,6 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
   border: 1.5px solid #132d25;
   border-radius: var(--play-radius) var(--play-radius-accent) var(--play-radius) var(--play-radius);
   box-shadow: none;
-  counter-increment: playful-speakers;
-}
-
-.registration-speaker-card::after {
-  position: absolute;
-  top: -.65rem;
-  right: 1rem;
-  content: "0" counter(playful-speakers);
-  color: rgb(19 45 37 / .08);
-  font-family: "Arial Rounded MT Bold", "Avenir Next Rounded", sans-serif;
-  font-size: 4.5rem;
-  font-weight: 900;
-  line-height: 1;
 }
 
 .registration-speaker-card:nth-child(1) { background: #eee4bf; }
