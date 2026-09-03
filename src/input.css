@@ -276,7 +276,7 @@ body[data-page="registration"] .registration-header .nav-link[aria-current="page
 
 @media (min-width: 768px) {
   .registration-featured-speaker-copy {
-    padding-top: calc(1.75rem + 100px);
+    padding-top: calc(1.75rem + 50px);
   }
 }
 
