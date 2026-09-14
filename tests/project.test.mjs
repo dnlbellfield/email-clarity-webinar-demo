@@ -114,7 +114,7 @@ test("primary navigation connects the campaign, case study, and email previews",
   assert.match(emails, /href="\/email-previews\.html" aria-current="page">Email Previews<\/a>/);
   assert.match(caseStudy, /href="\/"[^>]*>See the sign-up experience/);
   assert.match(caseStudy, /href="\/email-previews\.html">Preview the emails/);
-  assert.match(caseStudy, />Commonlight Studio case study</);
+  assert.match(caseStudy, />Commonlight Studio email campaign demo</);
   assert.doesNotMatch(caseStudy, /portfolio project|portfolio example/i);
   assert.doesNotMatch(caseStudy, /href="\/confirmation\.html"/);
   assert.match(campaign, /href="\/case-study\.html">View the Email Clarity project case study/);
