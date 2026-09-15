@@ -126,7 +126,7 @@ function validate(form) {
     valid = false;
   }
   if (!consent.checked) {
-    setError(consent, "Select the checkbox to consent to the three-email sequence.");
+    setError(consent, "Select the checkbox to request the three emails.");
     valid = false;
   }
   return valid;
@@ -157,8 +157,8 @@ function initSequenceForm(configurationPromise) {
     }
 
     button.disabled = true;
-    button.textContent = "Preparing the sequence…";
-    status.textContent = "Validating your request.";
+    button.textContent = "Preparing your email request…";
+    status.textContent = "Sending your request…";
     let result = { success: true, delivery: "inactive" };
     try {
       const response = await fetch(sequenceEndpoint, {

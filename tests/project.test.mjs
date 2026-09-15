@@ -24,7 +24,7 @@ test("demo sequence fields have explicit labels and no analytics PII interpolati
 
 test("case study contains clear disclosure", async () => {
   const caseStudy = await readFile("site/index.html", "utf8");
-  assert.match(caseStudy, /Case study note:/i);
+  assert.match(caseStudy, /Demo note:/i);
   assert.match(caseStudy, /created to simulate a complete online-event campaign/i);
   assert.match(caseStudy, /not client work/i);
   assert.match(caseStudy, /does not report real-world results/i);
@@ -38,7 +38,8 @@ test("campaign landing has a minimal explicit demo-sequence opt-in", async () =>
   assert.match(html, /name="sequenceConsent"[^>]+required/);
   assert.doesNotMatch(html, /name="sequenceConsent"[^>]+checked/);
   assert.match(html, /three-email Commonlight demonstration sequence/i);
-  assert.match(html, /This does not register you for a live event/i);
+  assert.match(html, /Commonlight Studio, its speakers, and this event are fictional/i);
+  assert.match(html, /it does not register you for a live event/i);
   assert.match(html, /Receive the three-email sequence/i);
   assert.match(html, /unsubscribe at any time/i);
   assert.match(html, /not be added to a general marketing list/i);
@@ -64,10 +65,10 @@ test("opt-in journey pages contain only user-facing next-step language", async (
 
   const confirmation = await readFile("site/confirmation.html", "utf8");
   assert.match(confirmation, /Check your inbox/i);
-  assert.match(confirmation, /Click it to begin the three-email Commonlight sequence/i);
+  assert.match(confirmation, /Click its link to confirm that you made the request and start the Commonlight emails/i);
 
   const sequenceConfirmed = await readFile("site/sequence-confirmed.html", "utf8");
-  assert.match(sequenceConfirmed, /The first Commonlight message should arrive shortly/i);
+  assert.match(sequenceConfirmed, /The first Commonlight email should arrive shortly/i);
 });
 
 test("the locked workshop definition is consistent across campaign sources", async () => {
@@ -105,19 +106,19 @@ test("primary navigation connects the campaign, case study, and email previews",
   for (const html of [campaign, caseStudy, emails]) {
     assert.match(html, /<nav class="site-nav" aria-label="Primary navigation">/);
     assert.match(html, /href="\/"[^>]*>Campaign Demo<\/a>/);
-    assert.match(html, /href="\/case-study\.html"[^>]*>Case Study<\/a>/);
+    assert.match(html, /href="\/case-study\.html"[^>]*>Behind the Demo<\/a>/);
     assert.match(html, /href="\/email-previews\.html"[^>]*>Email Previews<\/a>/);
   }
 
   assert.match(campaign, /href="\/" aria-current="page">Campaign Demo<\/a>/);
-  assert.match(caseStudy, /href="\/case-study\.html" aria-current="page">Case Study<\/a>/);
+  assert.match(caseStudy, /href="\/case-study\.html" aria-current="page">Behind the Demo<\/a>/);
   assert.match(emails, /href="\/email-previews\.html" aria-current="page">Email Previews<\/a>/);
   assert.match(caseStudy, /href="\/"[^>]*>See the sign-up experience/);
   assert.match(caseStudy, /href="\/email-previews\.html">Preview the emails/);
   assert.match(caseStudy, />Commonlight Studio email campaign demo</);
   assert.doesNotMatch(caseStudy, /portfolio project|portfolio example/i);
   assert.doesNotMatch(caseStudy, /href="\/confirmation\.html"/);
-  assert.match(campaign, /href="\/case-study\.html">View the Email Clarity project case study/);
+  assert.match(campaign, /href="\/case-study\.html">See how the demo was built/);
 });
 
 test("inbox sequence is unnumbered and unsubscribable", async () => {
@@ -180,8 +181,8 @@ test("email preview cards expose subjects and an accessible reusable preview dia
   const html = await readFile("site/email-previews.html", "utf8");
   const js = await readFile("site/assets/app.js", "utf8");
   for (const subject of [
-    "Your workshop details: A Practical Content System",
-    "Workshop reminder: A Practical Content System",
+    "Your workshop details: Build a Better Content Workflow",
+    "Workshop reminder: Build a Better Content Workflow",
     "One thing to bring to A Practical Content System"
   ]) assert.match(html, new RegExp(subject));
   assert.equal(html.match(/data-email-dialog-open/g)?.length, 8);
